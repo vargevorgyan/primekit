@@ -434,7 +434,7 @@ window.addEventListener('scroll', handleScroll)
           el.classList.remove('working-active')
           const otherIcon = el.querySelector('.working-question-icon img')
           if (otherIcon) {
-            otherIcon.src = '../assets/icon-plus.svg'
+            otherIcon.src = './assets/icon-plus.svg'
             otherIcon.alt = '+'
           }
         }
@@ -443,10 +443,10 @@ window.addEventListener('scroll', handleScroll)
       // открыть / закрыть текущий
       item.classList.toggle('working-active')
       if (item.classList.contains('working-active')) {
-        iconImg.src = '../assets/icon-minus.svg'
+        iconImg.src = './assets/icon-minus.svg'
         iconImg.alt = '-'
       } else {
-        iconImg.src = '../assets/icon-plus.svg'
+        iconImg.src = './assets/icon-plus.svg'
         iconImg.alt = '+'
       }
     })

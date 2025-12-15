@@ -114,19 +114,28 @@
   justify-content: center;
   transition: opacity 0.3s ease;
   padding: 0;
-  background: none;
 }
 
 .portfolio-nav-btn.prev {
   left: 0;
   justify-content: flex-start;
-  padding-left: 20px;
+  padding-left: 68px;
+  background: linear-gradient(
+    270deg,
+    rgba(26, 26, 26, 0) 0%,
+    rgba(26, 26, 26, 0.6) 100%
+  );
 }
 
 .portfolio-nav-btn.next {
   right: 0;
   justify-content: flex-end;
-  padding-right: 20px;
+  padding-right: 68px;
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 0) 0%,
+    rgba(26, 26, 26, 0.6) 100%
+  );
 }
 
 /* Button states: white when disabled, pink when enabled */
@@ -164,14 +173,14 @@
 }
 
 .portfolio-detail-label {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   color: #8d8d8d; /* Gray */
   line-height: 1.2;
 }
 
 .portfolio-detail-value {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 500;
   color: #000;
@@ -179,7 +188,7 @@
 }
 
 .portfolio-detail-text {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   color: #000;
   line-height: 1.5;
@@ -267,5 +276,21 @@
     background: #fff;
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .portfolio-nav-btn.next {
+    padding-right: 45px;
+  }
+  
+  .portfolio-nav-btn.prev {
+    padding-left: 45px;
+  }
+}
+@media (max-width: 450px) {
+  .portfolio-nav-btn.next {
+    padding-right: 30px;
+  }
+  
+  .portfolio-nav-btn.prev {
+    padding-left: 30px;
   }
 }

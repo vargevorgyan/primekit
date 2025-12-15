@@ -107,6 +107,7 @@
   max-height: 500px;
 }
 .working-faq-answer {
+  margin-top: 1px;
   padding-bottom: 30px;
 }
 .working-question {
@@ -129,11 +130,6 @@
 }
 
 @media (max-width: 1440px) {
-  .working-how-we-work,
-  .working-equipment,
-  .working-faq {
-    padding: 60px 40px 0 40px;
-  }
   .working-step-img {
     width: 332px;
   }
@@ -142,13 +138,20 @@
   .working-step-img {
     width: 272px;
   }
+  .working-step {
+    grid-template-columns: 272px 1fr;
+  }
 }
 @media (max-width: 1024px) {
   .working-how-we-work,
   .working-equipment,
   .working-faq {
+    padding: 60px 40px 0 40px;
     flex-direction: column;
     gap: 40px;
+  }
+  .working-faq {
+    padding-bottom: 60px;
   }
   .working-intro {
     width: 100%;
@@ -177,6 +180,10 @@
     width: 100%;
     padding-right: 0;
   }
+  .working-step {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 @media (max-width: 860px) {
   .working-step-img {
@@ -189,11 +196,13 @@
   .working-faq {
     padding: 50px 20px 0 20px;
   }
+  .working-faq {
+    padding-bottom: 50px;
+  }
   .working-info {
     gap: 30px;
   }
   .working-step {
-    display: flex;
     flex-direction: column-reverse;
     gap: 16px;
   }
