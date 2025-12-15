@@ -42,6 +42,15 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* Ensure proper flexbox behavior for content */
+.portfolio-modal-content {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow-y: auto;
+  min-height: 0; /* Allow flex items to shrink */
+}
+
 .portfolio-modal-close {
   position: absolute;
   top: 20px;
@@ -70,15 +79,13 @@
 }
 
 .portfolio-modal-content {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 470px;
   height: 100%;
   overflow-y: auto;
 }
 
 .portfolio-modal-image-container {
-  width: 970px;
-  flex-shrink: 0;
   background: #f0f0f0;
   position: relative;
   min-height: 400px;
@@ -90,6 +97,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  min-height: 250px; /* Ensure minimum height for proper display */
 }
 
 .portfolio-nav-btn {
@@ -106,53 +114,40 @@
   justify-content: center;
   transition: opacity 0.3s ease;
   padding: 0;
+  background: none;
 }
 
 .portfolio-nav-btn.prev {
   left: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
   justify-content: flex-start;
   padding-left: 20px;
 }
 
 .portfolio-nav-btn.next {
   right: 0;
-  background: linear-gradient(
-    -90deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
   justify-content: flex-end;
   padding-right: 20px;
 }
 
-/* Icon wrapper to maintain the round button look if desired, or just icon */
-.nav-icon-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
+/* Button states: white when disabled, pink when enabled */
+.portfolio-nav-btn.disabled img {
+  filter: brightness(0) invert(1); /* White color */
+  opacity: 0.5;
 }
 
-.portfolio-nav-btn:hover .nav-icon-wrapper {
-  background: rgba(255, 255, 255, 0.4);
+.portfolio-nav-btn.enabled img {
+  filter: brightness(0) saturate(100%) invert(13%) sepia(94%) saturate(7450%)
+    hue-rotate(320deg) brightness(95%) contrast(105%); /* Pink color */
+  opacity: 1;
 }
 
-.nav-icon-wrapper img {
-  display: block;
+.portfolio-nav-btn img {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
 }
 
 .portfolio-modal-details {
-  flex-grow: 1;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -212,8 +207,15 @@
   color: #000000e5;
 }
 
+/* Medium screen styles - ensure minimum image width */
+@media (max-width: 1100px) {
+  .portfolio-modal-image-container {
+    min-width: 322px;
+  }
+}
+
 /* Mobile Styles */
-@media (max-width: 1024px) {
+@media (max-width: 950px) {
   .portfolio-modal-dialog {
     max-width: 100%;
     height: 100%;
@@ -223,12 +225,20 @@
   }
 
   .portfolio-modal-content {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
 
   .portfolio-modal-image-container {
     width: 100%;
-    height: 40vh; /* Takes up top part */
+    max-width: none; /* Remove max-width constraint on mobile */
+    height: auto; /* Let height be determined by aspect ratio */
+    min-height: 250px;
+    aspect-ratio: 16/9; /* Maintain aspect ratio */
+  }
+
+  .portfolio-modal-image {
+    height: 100%;
     min-height: 250px;
   }
 

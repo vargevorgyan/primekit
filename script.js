@@ -463,6 +463,7 @@ window.addEventListener('scroll', handleScroll)
       e.preventDefault()
       portfolioModal.classList.add('is-open')
       document.body.style.overflow = 'hidden'
+      updateModalNavigationButtons()
     })
   }
 
@@ -490,5 +491,25 @@ window.addEventListener('scroll', handleScroll)
         }
       }
     })
+  }
+
+  // Function to update navigation button states
+  function updateModalNavigationButtons() {
+    if (!portfolioModal) return
+
+    const prevBtn = portfolioModal.querySelector('.portfolio-nav-btn.prev')
+    const nextBtn = portfolioModal.querySelector('.portfolio-nav-btn.next')
+
+    // For now, since modal shows only one static image,
+    // both buttons are disabled (white)
+    // In the future, this could be updated to check for multiple slides
+    if (prevBtn) {
+      prevBtn.classList.remove('enabled')
+      prevBtn.classList.add('disabled')
+    }
+    if (nextBtn) {
+      nextBtn.classList.remove('enabled')
+      nextBtn.classList.add('disabled')
+    }
   }
 })()
