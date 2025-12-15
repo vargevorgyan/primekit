@@ -1,0 +1,281 @@
+/* About / Marquee / Slider */
+.about-section {
+  background-color: #fff;
+  padding: 0 0 96px;
+}
+
+/* Marquee Container */
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  height: 224px; /* Desktop height */
+  display: flex;
+  align-items: center;
+  background-color: #f7f7f7; /* Assuming a background might be needed, or transparent. User didn't specify. Keeping it transparent/inherited if not specified, but previous CSS had padding which implies it might be taking space. */
+  /* Reverting background assumption. Just layout. */
+  background: transparent;
+  padding: 0;
+}
+
+/* Marquee Track */
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 228px; /* Desktop gap */
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+  /* To ensure the gap is included in the shift, we need to handle the math correctly.
+     With gap, width is (item_width + gap) * N.
+     Moving -50% of the track works if the track contains exactly 2 identical sets.
+  */
+}
+
+.marquee-track img {
+  height: 32px; /* Keeping existing icon height, user didn't ask to change it */
+  opacity: 0.65;
+  filter: grayscale(1);
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      calc(-50% - 114px)
+    ); /* -50% of track width minus half of the gap? No. */
+  }
+}
+
+/* 
+   Correction on Animation Logic for Gap:
+   If we have 2 sets: [Set1] [Set2]
+   The width of Set1 is (ItemWidths + (N-1)*Gap).
+   But we have a gap between Set1 and Set2.
+   So the track looks like: Item1-Gap-Item2...ItemN-Gap-Item1-Gap...
+   
+   If we use gap property on flex container, the gap exists between ALL items.
+   So we have: [Item1] Gap [Item2] Gap ... [ItemN] Gap [Item1] Gap ...
+   
+   Total items = 2N.
+   Total gaps = 2N - 1 (visually). But physically in the layout, the last item has no gap after it unless we add padding or margin.
+   
+   To make it seamless:
+   We want to shift by the width of (Set1 + Gap).
+   
+   The width of the track is determined by content.
+   If we use `gap`, the gap is consistent.
+   
+   If we translate by -50% of the TOTAL width:
+   Total Width = 2 * (Width of Set) + (2N - 1) * Gap.
+   Half Width = (Width of Set) + (N - 0.5) * Gap.
+   
+   This is ALMOST correct but off by 0.5 Gap.
+   
+   Better approach:
+   Use `gap` but make sure the translation is exactly half the total width including the middle gap.
+   The browser calculates 50% of the element's width.
+   The element width is `Sum(Widths) + (Count - 1) * Gap`.
+   
+   Ideally, we want the shift to be `Sum(Widths_Set1) + N * Gap`.
+   
+   If we simply use `translateX(-50%)`, we are shifting `(2N items width + (2N-1) gap) / 2`.
+   = `N items width + (N - 0.5) gap`.
+   We are short by 0.5 gap.
+   
+   So when it loops, there will be a "jump" or visual glitch where the gap seems half size.
+   
+   Fix: Add a padding-right to the track equal to the gap value?
+   Or use a different structure.
+   
+   If I add `padding-right: 228px` (the gap size) to `.marquee-track`, then:
+   Total Width = `2N items + (2N-1) gaps + 1 padding (gap size)`
+   = `2N items + 2N gaps`.
+   
+   50% of that is `N items + N gaps`.
+   This is exactly one full cycle!
+   
+   So I need to set `padding-right` equal to `gap` on `.marquee-track`.
+   And update this padding in media queries too.
+*/
+
+.marquee-track {
+  padding-right: 228px; /* Equal to gap */
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  column-gap: 120px;
+  align-items: center;
+  padding: 0 var(--container-padding) 48px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+}
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12); */
+}
+
+.about-copy {
+  max-width: 904px;
+}
+
+.eyebrow {
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #000000e5;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 30px;
+  line-height: 1.6;
+  color: #000000e5;
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+
+.slider {
+  overflow-x: auto;
+  margin-top: 24px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-padding-left: var(--container-padding);
+  scroll-padding-right: var(--container-padding);
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-wrapper {
+  display: inline-flex;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.slider-track {
+  display: flex;
+  gap: 16px;
+  min-height: 220px;
+  padding-bottom: 8px;
+}
+
+.trait-card {
+  width: 416px;
+  height: 264px;
+  background: #f7f7f7;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+.trait-card-info {
+  display: flex;
+  margin-top: auto;
+  row-gap: 14px;
+  font-weight: 600;
+  flex-direction: column;
+}
+
+.trait-number {
+  font-size: 14px;
+  color: #0000004d;
+}
+
+.trait-card img {
+  width: 38px;
+  height: 38px;
+  filter: grayscale(1);
+}
+
+.trait-card-info h3 {
+  font-size: 20px;
+  color: #000000e5;
+  letter-spacing: -1%;
+}
+
+.trait-card-info p {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: -1%;
+}
+@media (max-width: 1200px) {
+  .about-text {
+    font-size: 24px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about-grid {
+    padding: 0 var(--container-padding) 32px;
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 30px;
+  }
+  /* Tablet marquee */
+  .marquee {
+    height: 144px;
+    padding: 0;
+  }
+  .marquee-track {
+    gap: 70px;
+    padding-right: 70px;
+  }
+
+  .slider {
+    margin-top: 32px;
+  }
+  .slider-track {
+    gap: 12px;
+  }
+  .eyebrow {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-text {
+    font-size: 18px;
+  }
+  /* Mobile marquee */
+  .marquee {
+    height: 98px;
+  }
+  .marquee-track {
+    gap: 56px;
+    padding-right: 56px;
+  }
+
+  .trait-card {
+    width: 390px;
+    height: 200px;
+  }
+  .trait-card-info h3 {
+    font-size: 16px;
+  }
+  .trait-card-info p {
+    font-size: 13px;
+  }
+}

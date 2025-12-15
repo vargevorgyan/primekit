@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/stats-slider.css" />
+  </head>
+  <body>
+    <section class="slider-section" id="stats-slider">
+      <div class="container">
+        <div class="sliders-title">/ Мы в цифрах</div>
+        <div class="slider-wrapper">
+          <div class="slides">
+            <article class="slide" data-index="0">
+              <div class="slide-grid">
+                <div class="metric metric-center">
+                  <div class="metric-value big">6000</div>
+                </div>
+              </div>
+              <p class="slider-description">м² собственного производства</p>
+            </article>
+
+            <article class="slide" data-index="1">
+              <div class="slide-grid">
+                <div class="metric metric-center">
+                  <div class="metric-value big">2000</div>
+                  <div class="metric-label">SKU на проект</div>
+                </div>
+              </div>
+              <p class="slider-description">
+                Для каждого проекта мы подбираем до 2000 позиций - от мебельных
+                модулей до фурнитуры и отделки.Это позволяет реализовать любые
+                решения и выдержать единую концепцию пространства.
+              </p>
+            </article>
+
+            <article class="slide" data-index="2">
+              <div class="slide-grid">
+                <div class="metric metric-center">
+                  <div class="metric-value big">10</div>
+                </div>
+              </div>
+              <p class="slider-description">лет на рынке услуг</p>
+            </article>
+          </div>
+
+          <button
+            class="slider-arrow slider-arrow-left"
+            aria-label="Previous slide"
+          >
+            <img src="../assets/icons/arrow-left.svg" alt="Previous" />
+          </button>
+          <button
+            class="slider-arrow slider-arrow-right"
+            aria-label="Next slide"
+          >
+            <img src="../assets/icons/arrow-right.svg" alt="Next" />
+          </button>
+
+          <div
+            class="slider-timeline"
+            role="tablist"
+            aria-label="Slider timeline"
+          >
+            <button
+              class="timeline-dot active"
+              data-index="0"
+              aria-label="Слайд 1"
+              role="tab"
+            ></button>
+            <button
+              class="timeline-dot"
+              data-index="1"
+              aria-label="Слайд 2"
+              role="tab"
+            ></button>
+            <button
+              class="timeline-dot"
+              data-index="2"
+              aria-label="Слайд 3"
+              role="tab"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      ;(() => {
+        const slider = document.getElementById('stats-slider')
+        if (!slider) return
+
+        const slides = Array.from(slider.querySelectorAll('.slide'))
+        const dots = Array.from(slider.querySelectorAll('.timeline-dot'))
+        const delay = 4000
+        let current = 0
+        let timerId
+
+        const applyStates = (index) => {
+          const prev = (index - 1 + slides.length) % slides.length
+          const next = (index + 1) % slides.length
+
+          slides.forEach((slide, i) => {
+            slide.classList.remove('state-current', 'state-prev', 'state-next')
+            if (i === index) {
+              slide.classList.add('state-current')
+            } else if (i === prev) {
+              slide.classList.add('state-prev')
+            } else if (i === next) {
+              slide.classList.add('state-next')
+            }
+          })
+
+          updateProgress(index)
+          current = index
+        }
+
+        const updateProgress = (index) => {
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index)
+            dot.classList.remove('progress')
+            if (i < index) {
+              dot.classList.add('prev')
+            } else dot.classList.remove('prev')
+            if (i === index) {
+              dot.style.setProperty('--progress-duration', `${delay}ms`)
+              void dot.offsetWidth
+              dot.classList.add('progress')
+            }
+          })
+        }
+
+        const goTo = (index) => {
+          const nextIndex = (index + slides.length) % slides.length
+          applyStates(nextIndex)
+        }
+        const startAutoplay = () => {
+          clearInterval(timerId)
+          timerId = setInterval(() => goTo(current + 1), delay)
+        }
+
+        slides.forEach((slide) => {
+          slide.addEventListener('click', (event) => {
+            const bounds = slide.getBoundingClientRect()
+            const clickX = event.clientX - bounds.left
+            const isLeft = clickX < bounds.width / 2
+            goTo(current + (isLeft ? -1 : 1))
+            startAutoplay()
+          })
+        })
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', (event) => {
+            const targetIndex = Number(event.currentTarget.dataset.index)
+            goTo(targetIndex)
+            startAutoplay()
+          })
+        })
+
+        const arrowLeft = slider.querySelector('.slider-arrow-left')
+        const arrowRight = slider.querySelector('.slider-arrow-right')
+
+        if (arrowLeft) {
+          arrowLeft.addEventListener('click', () => {
+            goTo(current - 1)
+            startAutoplay()
+          })
+        }
+
+        if (arrowRight) {
+          arrowRight.addEventListener('click', () => {
+            goTo(current + 1)
+            startAutoplay()
+          })
+        }
+
+        applyStates(0)
+        startAutoplay()
+      })()
+    </script>
+  </body>
+</html>

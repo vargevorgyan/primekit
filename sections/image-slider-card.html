@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider with Progress</title>
+    <link rel="stylesheet" href="../css/image-slider-card.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+  </head>
+  <body>
+    <div class="portfolio-hero-slider">
+      <!-- Top CTA (separate) -->
+      <div class="portfolio-top-cta">
+        <button class="portfolio-cta-icon">
+          <img src="../assets/icon-plus.svg" class="plus" alt="+" />
+        </button>
+        <div class="portfolio-cta-content">
+          <p>Полный список объектов<br />по запросу</p>
+          <a href="#" class="btn-primary"
+            >Получить
+            <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Slides -->
+      <div class="portfolio-slides" id="portfolioSlides">
+        <div
+          class="portfolio-slide"
+          data-index="01/21"
+          data-title="C3 Резиденс"
+          data-sub="(Школа на 825 мест)"
+        ></div>
+
+        <div
+          class="portfolio-slide"
+          data-index="02/21"
+          data-title="Объект №2"
+          data-sub="(Описание второго объекта)"
+        ></div>
+
+        <div
+          class="portfolio-slide"
+          data-index="03/21"
+          data-title="Объект №3"
+          data-sub="(Описание третьего)"
+        ></div>
+      </div>
+
+      <!-- Info card with arrows and progress -->
+      <div class="portfolio-info-card">
+        <div class="portfolio-info-content">
+          <div class="portfolio-info-content-container">
+            <div class="portfolio-info-index" id="portfolioInfoIndex"></div>
+            <div class="portfolio-info-title" id="portfolioInfoTitle"></div>
+            <div class="portfolio-info-sub" id="portfolioInfoSub"></div>
+            <a href="#" class="btn-primary"
+              >Подробнее
+              <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+            </a>
+          </div>
+          <div class="portfolio-card-progress">
+            <div
+              class="portfolio-card-progress-bar"
+              id="portfolioProgressBar"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Vertical arrows on right -->
+        <div class="portfolio-card-arrows">
+          <span class="portfolio-card-arrow portfolio-up" id="portfolioNextBtn">
+            <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+          </span>
+          <span
+            class="portfolio-card-arrow portfolio-down"
+            id="portfolioPrevBtn"
+          >
+            <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="<-" />
+          </span>
+        </div>
+
+        <!-- progress bar at bottom -->
+      </div>
+    </div>
+
+    <script>
+      const slidesEl = document.getElementById('portfolioSlides')
+      const slides = slidesEl.children
+
+      const infoIndex = document.getElementById('portfolioInfoIndex')
+      const infoTitle = document.getElementById('portfolioInfoTitle')
+      const infoSub = document.getElementById('portfolioInfoSub')
+
+      const prevBtn = document.getElementById('portfolioPrevBtn')
+      const nextBtn = document.getElementById('portfolioNextBtn')
+
+      const progressBar = document.getElementById('portfolioProgressBar')
+
+      let currentIndex = 0
+      const totalSlides = slides.length
+      const slideDuration = 4000
+      let animationFrame
+
+      function updateSlider() {
+        slidesEl.style.transform = `translateX(-${currentIndex * 100}%)`
+
+        const slide = slides[currentIndex]
+        infoIndex.innerText = slide.dataset.index
+        infoTitle.innerText = slide.dataset.title
+        infoSub.innerText = slide.dataset.sub
+
+        startProgress()
+      }
+
+      function startProgress() {
+        cancelAnimationFrame(animationFrame)
+        progressBar.style.width = '0%'
+        let start = null
+
+        function animate(timestamp) {
+          if (!start) start = timestamp
+          const elapsed = timestamp - start
+          const percent = Math.min((elapsed / slideDuration) * 100, 100)
+          progressBar.style.width = percent + '%'
+          if (elapsed < slideDuration) {
+            animationFrame = requestAnimationFrame(animate)
+          } else {
+            nextSlide()
+          }
+        }
+        animationFrame = requestAnimationFrame(animate)
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides
+        updateSlider()
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides
+        updateSlider()
+      }
+
+      prevBtn.addEventListener('click', () => {
+        prevSlide()
+      })
+      nextBtn.addEventListener('click', () => {
+        nextSlide()
+      })
+
+      // initialize
+      updateSlider()
+    </script>
+  </body>
+</html>

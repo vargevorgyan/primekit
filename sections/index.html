@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRIMEKIT</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/hero.css" />
+    <link rel="stylesheet" href="../css/about.css" />
+    <link rel="stylesheet" href="../css/stats-slider.css" />
+    <link rel="stylesheet" href="../css/image-slider-card.css" />
+    <link rel="stylesheet" href="../css/portfolio-modal.css" />
+    <link rel="stylesheet" href="../css/about-working.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-container">
+        <a href="#" class="logo top-logo">
+          <img src="../assets/logo-top.svg" alt="PRIMEKIT" />
+        </a>
+
+        <div class="navbar-right">
+          <nav class="nav-links">
+            <a href="#about">О нас</a>
+            <a href="#objects">Объекты</a>
+            <a href="#how">Как работаем</a>
+            <a href="#benefits">Преимущества</a>
+            <a href="#faq">Вопросы</a>
+            <a href="#contacts">Контакты</a>
+          </nav>
+
+          <button type="button" class="btn-primary js-open-modal">
+            Связаться
+            <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+          </button>
+          <button class="menu-toggle" aria-label="Открыть меню">
+            <img src="../assets/icon-menu.svg" alt="Меню" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div class="mobile-menu">
+        <div class="mobile-menu-header">
+          <a href="#" class="logo mobile-logo">
+            <img src="../assets/logo-top.svg" alt="PRIMEKIT" />
+          </a>
+          <button class="menu-close" aria-label="Закрыть меню">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6 6L18 18"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mobile-menu-body">
+          <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+              <a href="#about">О нас</a>
+              <a href="#objects">Объекты</a>
+              <a href="#how">Как работаем</a>
+              <a href="#benefits">Преимущества</a>
+              <a href="#faq">Вопросы</a>
+              <a href="#contacts">Контакты</a>
+            </nav>
+          </div>
+
+          <div class="mobile-menu-image">
+            <img src="../assets/class.png" alt="Interior" />
+          </div>
+        </div>
+        <div class="mobile-menu-bottom">
+          <div class="mobile-socials">
+            <div class="social-label">Соц сети</div>
+            <div class="social-links">
+              <a href="#">TG</a>
+              <a href="#">VK</a>
+              <a href="#">INST</a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn-primary mobile-contact-btn js-open-modal"
+          >
+            Связаться
+            <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section">
+        <div class="container hero-content">
+          <div class="hero-bottom-row">
+            <!-- Bottom Logo with custom colors -->
+            <div class="bottom-logo">
+              <img src="../assets/logo-bottom.svg" alt="PRIMEKIT" />
+            </div>
+
+            <div class="hero-description">
+              Комплексное оснащение социальных объектов оборудованием и мебелью
+              — от проектирования до сдачи и гарантийного обслуживания
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section">
+        <div class="marquee">
+          <div class="marquee-track">
+            <!-- Set 1 -->
+            <img src="../assets/marquee/pik.svg" alt="ПИК" />
+            <img src="../assets/marquee/etalon.svg" alt="Эталон" />
+            <img src="../assets/marquee/samalet.svg" alt="Самолёт" />
+            <img src="../assets/marquee/sezar.svg" alt="Sezar Group" />
+            <img src="../assets/marquee/mrgroup.svg" alt="MR Group" />
+            <img src="../assets/marquee/anorsi.svg" alt="Anorsi" />
+            <!-- Set 2 -->
+            <img src="../assets/marquee/pik.svg" alt="ПИК" />
+            <img src="../assets/marquee/etalon.svg" alt="Эталон" />
+            <img src="../assets/marquee/samalet.svg" alt="Самолёт" />
+            <img src="../assets/marquee/sezar.svg" alt="Sezar Group" />
+            <img src="../assets/marquee/mrgroup.svg" alt="MR Group" />
+            <img src="../assets/marquee/anorsi.svg" alt="Anorsi" />
+          </div>
+        </div>
+
+        <div class="container about-grid">
+          <div class="about-image">
+            <img
+              src="../assets/class.png"
+              alt="Интерьер класса"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="about-copy">
+            <p class="eyebrow">О нас</p>
+            <p class="about-text">
+              Мы занимаемся комплексным оснащением новых строительных объектов
+              оборудованием, мебелью, декором и инвентарём. Выполняем полный
+              цикл работ — проектирование, подбор оборудования, формирование
+              спецификации, согласование, комплектация (в том числе расстановка
+              и монтаж), сдача, гарантийное обслуживание.
+            </p>
+            <a href="#contact" class="btn-primary big">
+              Получить КП
+              <img
+                src="../assets/icon-arrow.svg"
+                class="arrow-icon"
+                alt="Переход"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="slider" id="trait-slider" aria-label="Наши преимущества">
+          <div class="slider-wrapper">
+            <div class="slider-track">
+              <article class="trait-card">
+                <div class="trait-number">01</div>
+                <div class="trait-card-info">
+                  <img src="../assets/icons/crown.svg" alt="Коронка" />
+                  <h3>Топ-1 в своём сегменте</h3>
+                  <p>
+                    Премиальные заказчики,<br />
+                    значимые объекты.
+                  </p>
+                </div>
+              </article>
+              <article class="trait-card">
+                <div class="trait-number">02</div>
+                <div class="trait-card-info">
+                  <img src="../assets/icons/galstuk.svg" alt="Галстук" />
+                  <h3>Команда профессионалов</h3>
+                  <p>
+                    Широкий круг компетенций, нацеленность на долгосрочное
+                    сотрудничество.
+                  </p>
+                </div>
+              </article>
+              <article class="trait-card">
+                <div class="trait-number">03</div>
+                <div class="trait-card-info">
+                  <img src="../assets/icons/star.svg" alt="Звезда" />
+                  <h3>Акцент на качество</h3>
+                  <p>В приоритете имидж и долговечность — делаем как себе.</p>
+                </div>
+              </article>
+              <article class="trait-card">
+                <div class="trait-number">04</div>
+                <div class="trait-card-info">
+                  <img src="../assets/icons/arrow.svg" alt="Стрелка" />
+                  <h3>Ответственность за результат</h3>
+                  <p>
+                    Берём на себя весь цикл работ и гарантируем сроки, качество
+                    и обязательства.
+                  </p>
+                </div>
+              </article>
+              <article class="trait-card">
+                <div class="trait-number">05</div>
+                <div class="trait-card-info">
+                  <img src="../assets/icons/prediction.svg" alt="Прогноз" />
+                  <h3>Прозрачность и контроль</h3>
+                  <p>
+                    Открытая коммуникация, отчёты и контроль на каждом этапе.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-slider-section" id="stats-slider">
+        <div class="stats-container">
+          <div class="stats-sliders-title">/ Мы в цифрах</div>
+          <div class="stats-slider-wrapper">
+            <div class="stats-slides">
+              <article class="stats-slide" data-index="0">
+                <div class="stats-slide-grid">
+                  <div class="stats-metric stats-metric-center">
+                    <div class="metric-value big">6000</div>
+                  </div>
+                </div>
+                <p class="stats-slider-description">
+                  м² собственного производства
+                </p>
+              </article>
+
+              <article class="stats-slide" data-index="1">
+                <div class="stats-slide-grid">
+                  <div class="stats-metric stats-metric-center">
+                    <div class="metric-value big">2000</div>
+                    <div class="stats-metric-label">SKU на проект</div>
+                  </div>
+                </div>
+                <p class="stats-slider-description">
+                  Для каждого проекта мы подбираем до 2000 позиций - от
+                  мебельных модулей до фурнитуры и отделки.Это позволяет
+                  реализовать любые решения и выдержать единую концепцию
+                  пространства.
+                </p>
+              </article>
+
+              <article class="stats-slide" data-index="2">
+                <div class="stats-slide-grid">
+                  <div class="stats-metric stats-metric-center">
+                    <div class="metric-value big">10</div>
+                  </div>
+                </div>
+                <p class="stats-slider-description">лет на рынке услуг</p>
+              </article>
+            </div>
+
+            <button
+              class="stats-slider-arrow stats-slider-arrow-left"
+              aria-label="Previous slide"
+            >
+              <img src="../assets/icons/arrow-left.svg" alt="Previous" />
+            </button>
+            <button
+              class="stats-slider-arrow stats-slider-arrow-right"
+              aria-label="Next slide"
+            >
+              <img src="../assets/icons/arrow-right.svg" alt="Next" />
+            </button>
+
+            <div
+              class="stats-slider-timeline"
+              role="tablist"
+              aria-label="Slider timeline"
+            >
+              <button
+                class="stats-timeline-dot active"
+                data-index="0"
+                aria-label="Слайд 1"
+                role="tab"
+              ></button>
+              <button
+                class="stats-timeline-dot"
+                data-index="1"
+                aria-label="Слайд 2"
+                role="tab"
+              ></button>
+              <button
+                class="stats-timeline-dot"
+                data-index="2"
+                aria-label="Слайд 3"
+                role="tab"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="portfolio-hero-slider">
+        <!-- Top CTA (separate) -->
+        <div class="portfolio-top-cta">
+          <button class="portfolio-cta-icon">
+            <img src="../assets/icon-plus.svg" class="plus" alt="+" />
+          </button>
+          <div class="portfolio-cta-content">
+            <p>Полный список объектов по запросу</p>
+            <a href="#" class="btn-primary"
+              >Получить
+              <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Slides -->
+        <div class="portfolio-slides" id="portfolioSlides">
+          <div
+            class="portfolio-slide"
+            data-index="01/21"
+            data-title="C3 Резиденс"
+            data-sub="(Школа на 825 мест)"
+          ></div>
+
+          <div
+            class="portfolio-slide"
+            data-index="02/21"
+            data-title="Объект №2"
+            data-sub="(Описание второго объекта)"
+          ></div>
+
+          <div
+            class="portfolio-slide"
+            data-index="03/21"
+            data-title="Объект №3"
+            data-sub="(Описание третьего)"
+          ></div>
+        </div>
+
+        <!-- Info card with arrows and progress -->
+        <div class="portfolio-info-card">
+          <div class="portfolio-info-content">
+            <div class="portfolio-info-content-container">
+              <div class="portfolio-info-index" id="portfolioInfoIndex"></div>
+              <div class="portfolio-info-title" id="portfolioInfoTitle"></div>
+              <div class="portfolio-info-sub" id="portfolioInfoSub"></div>
+              <a href="#" class="btn-primary"
+                >Подробнее
+                <img
+                  src="../assets/icon-arrow.svg"
+                  class="arrow-icon"
+                  alt="->"
+                />
+              </a>
+            </div>
+            <div class="portfolio-card-progress">
+              <div
+                class="portfolio-card-progress-bar"
+                id="portfolioProgressBar"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Vertical arrows on right -->
+          <div class="portfolio-card-arrows">
+            <span
+              class="portfolio-card-arrow portfolio-up"
+              id="portfolioNextBtn"
+            >
+              <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="->" />
+            </span>
+            <span
+              class="portfolio-card-arrow portfolio-down"
+              id="portfolioPrevBtn"
+            >
+              <img src="../assets/icon-arrow.svg" class="arrow-icon" alt="<-" />
+            </span>
+          </div>
+
+          <!-- progress bar at bottom -->
+        </div>
+      </div>
+
+      <section class="working-how-we-work">
+        <div class="working-intro">
+          <p class="working-section-title">Как мы работаем /</p>
+          <div class="working-main-title">
+            Берём на себя весь цикл работ — от проверки проекта до финальной
+            сдачи объекта
+          </div>
+          <div class="working-intro-text">
+            Вы получаете одного подрядчика, полный контроль сроков и
+            прозрачность на каждом этапе
+          </div>
+        </div>
+        <div class="working-steps">
+          <div class="working-step">
+            <div class="working-step-info">
+              <span class="working-step-order">01</span>
+              <span class="working-step-text">
+                <p class="working-step-title">Проект и планирование</p>
+                <p class="working-step-description" style="max-width: 432px">
+                  Получаем ТХ, анализируем документацию, предлагаем оптимизации
+                  и альтернативы. Формируем КП и таймлайн
+                </p>
+              </span>
+            </div>
+            <img
+              class="working-step-img"
+              src="../assets/planning.png"
+              loading="lazy"
+              alt="planning"
+            />
+          </div>
+
+          <div class="working-step">
+            <div class="working-step-info">
+              <span class="working-step-order">02</span>
+              <span class="working-step-text">
+                <p class="working-step-title">Производство и логистика</p>
+                <p class="working-step-description" style="max-width: 304px">
+                  Выпускаем мебель на собственной фабрике 6000 м², закупаем
+                  материалы у проверенных поставщиков, организуем доставку
+                </p>
+              </span>
+            </div>
+
+            <img
+              class="working-step-img"
+              src="../assets/production.png"
+              alt="production"
+              loading="lazy"
+            />
+          </div>
+          <div class="working-step">
+            <div class="working-step-info">
+              <span class="working-step-order">03</span>
+              <span class="working-step-text">
+                <p class="working-step-title">Монтаж и сопровождение</p>
+                <p class="working-step-description" style="max-width: 432px">
+                  Монтируем, настраиваем, сдаём объект и предоставляем
+                  гарантийное обслуживание
+                </p>
+              </span>
+            </div>
+            <img
+              class="working-step-img"
+              src="../assets/installation.png"
+              alt="installation"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+      <section class="working-equipment">
+        <div class="working-intro">
+          <img
+            class="working-full-production-img"
+            src="../assets/full-production.jpg"
+            alt="full-production"
+          />
+        </div>
+        <div class="working-info">
+          <span class="working-section-title"> Производство / </span>
+          <span class="working-main-title">
+            Полный цикл собственного производства
+          </span>
+          <span class="working-intro-text"
+            >Наше производство оснащено современным высокотехнологичным
+            оборудованием, обеспечивающим точность на каждом этапе — от
+            проектирования и раскроя до сборки и финишной обработки. Мы внедряем
+            автоматизированные системы контроля, чтобы каждая деталь
+            соответствовала высоким стандартам качества, прочности и эстетики.
+            Результат — мебель, которая служит годами и сохраняет идеальный
+            вид.</span
+          >
+          <span class="working-intro-text">
+            Производственная база компании оснащена оборудованием ведущих
+            брендов, что позволяет обеспечивать высокую точность и повторяемость
+            изделий. Мы используем автоматические линии раскроя, фрезеровки и
+            покраски, а также систему внутреннего контроля качества.
+          </span>
+          <button class="btn-primary">
+            Об оборудовании
+            <img src="../assets/icon-arrow.svg" alt="->" />
+          </button>
+        </div>
+      </section>
+      <section class="working-faq">
+        <div class="working-intro">
+          <span class="working-section-title">FAQ /</span>
+          <span class="working-main-title">Ответы на популярные вопросы</span>
+          <span class="working-intro-text"
+            >Собрали ключевую информацию, чтобы вам не приходилось искать дольше
+            нужного</span
+          >
+          <button class="btn-primary">
+            Написать в поддержку
+            <img src="../assets/icon-arrow.svg" alt="->" />
+          </button>
+        </div>
+        <div class="working-faq-questions">
+          <div class="working-faq-question">
+            <span class="working-question">
+              <p class="working-step-title">
+                Вы работаете только в Москве и МО?
+              </p>
+              <span class="working-question-icon">
+                <img
+                  src="../assets/icon-plus.svg"
+                  alt="+"
+                  width="17"
+                  height="17"
+                />
+              </span>
+            </span>
+            <span class="working-faq-answer working-intro-text">
+              Мы конкурентны в своем сегменте (не дешево/дорого — качественно).
+              Комплексные скидки возможны при победе в нескольких разделах
+              ТХ/объектах одного заказчика.</span
+            >
+          </div>
+          <div class="working-faq-question">
+            <span class="working-question">
+              <p class="working-step-title">Берете ли вы монтаж?</p>
+              <span class="working-question-icon">
+                <img
+                  src="../assets/icon-plus.svg"
+                  alt="+"
+                  width="17"
+                  height="17"
+                />
+              </span>
+            </span>
+            <span class="working-faq-answer working-intro-text">
+              Мы конкурентны в своем сегменте (не дешево/дорого — качественно).
+              Комплексные скидки возможны при победе в нескольких разделах
+              ТХ/объектах одного заказчика.</span
+            >
+          </div>
+          <div class="working-faq-question">
+            <span class="working-question">
+              <p class="working-step-title">
+                Можете ли предложить альтернативы по срокам/бюджету?
+              </p>
+              <span class="working-question-icon">
+                <img
+                  src="../assets/icon-plus.svg"
+                  alt="+"
+                  width="17"
+                  height="17"
+                />
+              </span>
+            </span>
+            <span class="working-faq-answer working-intro-text">
+              Мы конкурентны в своем сегменте (не дешево/дорого — качественно).
+              Комплексные скидки возможны при победе в нескольких разделах
+              ТХ/объектах одного заказчика.</span
+            >
+          </div>
+          <div class="working-faq-question">
+            <span class="working-question">
+              <p class="working-step-title">Как гарантируете качество?</p>
+              <span class="working-question-icon">
+                <img
+                  src="../assets/icon-plus.svg"
+                  alt="+"
+                  width="17"
+                  height="17"
+                />
+              </span>
+            </span>
+            <span class="working-faq-answer working-intro-text">
+              Мы конкурентны в своем сегменте (не дешево/дорого — качественно).
+              Комплексные скидки возможны при победе в нескольких разделах
+              ТХ/объектах одного заказчика.</span
+            >
+          </div>
+          <div class="working-faq-question">
+            <span class="working-question">
+              <p class="working-step-title">
+                С какими типами объектов вы не работаете?
+              </p>
+              <span class="working-question-icon">
+                <img
+                  src="../assets/icon-plus.svg"
+                  alt="+"
+                  width="17"
+                  height="17"
+                />
+              </span>
+            </span>
+            <span class="working-faq-answer working-intro-text">
+              Мы конкурентны в своем сегменте (не дешево/дорого — качественно).
+              Комплексные скидки возможны при победе в нескольких разделах
+              ТХ/объектах одного заказчика.</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="header-modal" id="contact-modal" aria-hidden="true">
+      <div class="header-modal-overlay" tabindex="-1" data-close></div>
+      <div class="header-modal-dialog">
+        <button class="header-modal-close" aria-label="Закрыть" data-close>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6L6 18"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="header-modal-content">
+          <h2 class="header-modal-title">
+            Оставьте заявку — поможем подобрать оптимальное решение под ваш
+            проект
+          </h2>
+          <form class="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" required />
+              <div class="field-error">Обязательное поле</div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" required />
+              <div class="field-error">Введите корректный номер</div>
+            </div>
+            <div class="form-group">
+              <label for="email">Почта</label>
+              <input type="email" id="email" name="email" required />
+              <div class="field-error">Введите корректный email</div>
+            </div>
+            <div class="form-group">
+              <label for="comment">Комментарий</label>
+              <input type="text" id="comment" name="comment" />
+            </div>
+            <label class="pink-checkbox">
+              <input
+                type="checkbox"
+                id="consent"
+                name="consent"
+                required
+                checked
+              />
+              <span class="box">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="4 12 9 17 20 6" />
+                </svg>
+              </span>
+              <div class="text">
+                Я даю согласие на обработку персональных данных в соответствии с
+                Политикой конфиденциальности
+              </div>
+            </label>
+            <div class="form-footer">
+              <button type="submit" class="btn-primary">
+                Отправить
+                <img
+                  src="../assets/icon-arrow.svg"
+                  class="arrow-icon"
+                  alt="->"
+                />
+              </button>
+              <div class="form-error-message">Заполните обязательные поля</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-modal" id="portfolio-modal" aria-hidden="true">
+      <div class="portfolio-modal-overlay" tabindex="-1" data-close></div>
+      <div class="portfolio-modal-dialog">
+        <div class="portfolio-modal-content">
+          <div class="portfolio-modal-image-container">
+            <img
+              src="../assets/slider-class-bg.jpg"
+              class="portfolio-modal-image"
+              alt="Школа"
+            />
+            <button class="portfolio-nav-btn prev" aria-label="Предыдущее фото">
+              <span class="nav-icon-wrapper">
+                <img
+                  src="../assets/icon-arrow.svg"
+                  style="transform: rotate(180deg)"
+                  alt="<"
+                />
+              </span>
+            </button>
+            <button class="portfolio-nav-btn next" aria-label="Следующее фото">
+              <span class="nav-icon-wrapper">
+                <img src="../assets/icon-arrow.svg" alt=">" />
+              </span>
+            </button>
+          </div>
+          <div class="portfolio-modal-details">
+            <button
+              class="portfolio-modal-close"
+              aria-label="Закрыть"
+              data-close
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6 6L18 18"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <div class="portfolio-detail-item">
+              <span class="portfolio-detail-label">Объект:</span>
+              <span class="portfolio-detail-value">Школа</span>
+            </div>
+            <div class="portfolio-detail-item">
+              <span class="portfolio-detail-label">Мест:</span>
+              <span class="portfolio-detail-value">825</span>
+            </div>
+            <div class="portfolio-detail-item">
+              <span class="portfolio-detail-label">Заказчик:</span>
+              <span class="portfolio-detail-value">СЗ Резиденс</span>
+            </div>
+            <div class="portfolio-detail-item">
+              <span class="portfolio-detail-label">Этап:</span>
+              <span class="portfolio-detail-value">Сдан, 2025 г.</span>
+            </div>
+            <div class="portfolio-detail-item">
+              <span class="portfolio-detail-label">Вид работ:</span>
+              <p class="portfolio-detail-text">
+                Комплексное оснащение: мебель, поставка и монтаж монтируемого и
+                немонтируемого оборудования «под ключ». Проектирование,
+                согласование разделов ТХ в МГЭ. Поставка и монтаж: коллективных
+                раковин; сантехнических перегородок; оборудование и навигация
+                для ОДИ; общая навигация; подоконники и экраны для радиаторов.
+              </p>
+            </div>
+            <div class="portfolio-detail-item">
+              <span class="portfolio-detail-label">Адрес:</span>
+              <p class="portfolio-detail-text">
+                г. Москва, Волоколамское шоссе, 75В (СЗАО, Покровское-Стрешнево)
+              </p>
+            </div>
+
+            <div class="portfolio-award">
+              <img src="../assets/icons/crown.svg" alt="Award" />
+              <p>
+                Лауреат Архитектурной премии Москвы по номинации «Лучшее АГР
+                школы»
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <section class="footer-contacts-container">
+        <!-- Map and Contacts Section -->
+        <div class="footer-contacts">
+          <div class="footer-contacts-map"></div>
+          <div class="footer-map-dot"></div>
+
+          <div class="footer-contacts-content">
+            <span class="footer-contacts-label">Контакты /</span>
+
+            <p class="footer-contacts-phone">+7 (499) 559-88-88</p>
+            <p class="footer-contacts-phone">+7 (915) 081-88-88</p>
+
+            <p class="footer-contacts-mail">info@primekit.ru</p>
+
+            <p class="footer-contacts-address">
+              125047, г. Москва, ул. 1-я Тверская-<br />Ямская, д. 23. стр. 1
+            </p>
+
+            <button class="btn-primary">
+              Построить маршрут <img src="../assets/icon-arrow.svg" alt="->" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Logo and Footer Bottom Section -->
+        <div class="footer-logo-section">
+          <div class="footer-contacts-large-text">
+            <img src="../assets/footer-logo.svg" alt="PRIMEKIT" />
+          </div>
+
+          <div class="footer-bottom">
+            <div class="footer-copyright">© PrimeKit LLC 2025</div>
+            <div class="footer-links">
+              <a href="#">TG</a>
+              <a href="#">VK</a>
+              <a href="#">INST</a>
+            </div>
+            <div class="footer-agreement">
+              Согласие на обработку персональных данных
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
