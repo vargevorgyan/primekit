@@ -177,6 +177,10 @@
     top: 30%;
     left: 60%;
   }
+
+  .footer-contacts-large-text img {
+    width: 1024px;
+  }
 }
 
 /* Mobile */
@@ -222,6 +226,11 @@
 
   .footer-contacts-large-text {
     margin-bottom: 40px;
+    justify-content: flex-start;
+  }
+
+  .footer-contacts-large-text img {
+    width: 834px;
   }
 
   .footer-bottom {
