@@ -457,7 +457,7 @@ window.addEventListener('scroll', handleScroll)
 ;(() => {
   const portfolioModal = document.getElementById('portfolio-modal')
   const portfolioOpenBtn = document.querySelector('.portfolio-cta-icon')
-  
+
   if (portfolioOpenBtn && portfolioModal) {
     portfolioOpenBtn.addEventListener('click', (e) => {
       e.preventDefault()
