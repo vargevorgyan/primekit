@@ -33,8 +33,8 @@
   background: #fff;
   width: 100%;
   max-width: 1440px;
-  height: auto;
-  max-height: 90vh;
+  height: 100%;
+  max-height: 730px;
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -98,6 +98,15 @@
   object-fit: cover;
   display: block;
   min-height: 250px; /* Ensure minimum height for proper display */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.portfolio-modal-image.fade-out {
+  opacity: 0;
+}
+
+.portfolio-modal-image.fade-in {
+  opacity: 1;
 }
 
 .portfolio-nav-btn {
@@ -156,6 +165,10 @@
   transition: all 0.3s ease;
 }
 
+.portfolio-nav-btn:hover path {
+  fill: var(--color-pink);
+}
+
 .portfolio-modal-details {
   padding: 20px;
   display: flex;
@@ -173,29 +186,25 @@
 }
 
 .portfolio-detail-label {
-  font-family: "Inter", sans-serif;
   font-size: 14px;
-  color: #8d8d8d; /* Gray */
-  line-height: 1.2;
+  color: #00000099;
+  line-height: 1;
 }
 
 .portfolio-detail-value {
-  font-family: "Inter", sans-serif;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000;
-  line-height: 1.2;
+  line-height: 1;
 }
 
 .portfolio-detail-text {
-  font-family: "Inter", sans-serif;
   font-size: 16px;
   color: #000;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .portfolio-award {
-  margin-top: auto;
   background: #f5f5f5;
   padding: 20px;
   display: flex;
@@ -212,7 +221,7 @@
   font-size: 14px;
   font-weight: 600;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1;
   color: #000000e5;
 }
 
@@ -228,8 +237,8 @@
   .portfolio-modal-dialog {
     max-width: 100%;
     height: 100%;
+    max-height: 730px;
     margin: 0;
-    max-height: none;
     border-radius: 0;
   }
 
@@ -280,7 +289,7 @@
   .portfolio-nav-btn.next {
     padding-right: 45px;
   }
-  
+
   .portfolio-nav-btn.prev {
     padding-left: 45px;
   }
@@ -289,7 +298,7 @@
   .portfolio-nav-btn.next {
     padding-right: 30px;
   }
-  
+
   .portfolio-nav-btn.prev {
     padding-left: 30px;
   }

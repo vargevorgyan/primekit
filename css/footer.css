@@ -105,7 +105,7 @@
   gap: 40px;
   padding-right: 40px; /* Equal to gap */
   width: max-content;
-  animation: footerMarquee 40s linear infinite;
+  animation: footerMarquee 30s linear infinite;
   will-change: transform;
 }
 

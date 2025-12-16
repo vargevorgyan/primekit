@@ -85,11 +85,10 @@ html {
   transition: transform 0.6s ease;
 }
 
-/* slide backgrounds all static same image */
+/* slide backgrounds - each slide has its own background image set via inline styles */
 .portfolio-slide {
   width: 100%;
   flex-shrink: 0;
-  background-image: url('../assets/slider-class-bg.jpg');
   background-size: cover;
   background-position: center;
 }
