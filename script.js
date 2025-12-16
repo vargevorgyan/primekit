@@ -456,14 +456,124 @@ window.addEventListener('scroll', handleScroll)
 // --- Portfolio Modal Logic ---
 ;(() => {
   const portfolioModal = document.getElementById('portfolio-modal')
-  const portfolioOpenBtn = document.querySelector('.portfolio-cta-icon')
+  const portfolioSlides = document.querySelectorAll('.portfolio-slide')
+  let currentPortfolioIndex = 0
 
+  // Function to populate modal with portfolio data
+  function populatePortfolioModal(index) {
+    if (!portfolioModal || !portfolioData[index]) return
+
+    const data = portfolioData[index]
+    currentPortfolioIndex = index
+
+    // Update modal image with animation
+    const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
+    if (modalImage) {
+      // Start fade-out animation
+      modalImage.classList.add('fade-out')
+      modalImage.classList.remove('fade-in')
+
+      // Change image after fade-out completes
+      setTimeout(() => {
+        modalImage.src = data.modalImage
+        modalImage.alt = data.object
+
+        // Start fade-in animation
+        modalImage.classList.remove('fade-out')
+        modalImage.classList.add('fade-in')
+      }, 150) // Half of the transition duration
+    }
+
+    // Update modal details
+    const detailItems = portfolioModal.querySelectorAll(
+      '.portfolio-detail-item'
+    )
+
+    // Object
+    const objectItem = detailItems[0]
+    if (objectItem) {
+      objectItem.querySelector('.portfolio-detail-value').textContent =
+        data.object
+    }
+
+    // Mest
+    const mestItem = detailItems[1]
+    if (mestItem) {
+      mestItem.querySelector('.portfolio-detail-value').textContent = data.mest
+    }
+
+    // Customer
+    const customerItem = detailItems[2]
+    if (customerItem) {
+      customerItem.querySelector('.portfolio-detail-value').textContent =
+        data.customer
+    }
+
+    // Stage
+    const stageItem = detailItems[3]
+    if (stageItem) {
+      stageItem.querySelector('.portfolio-detail-value').textContent =
+        data.stage
+    }
+
+    // Work
+    const workItem = detailItems[4]
+    if (workItem) {
+      workItem.querySelector('.portfolio-detail-text').textContent = data.work
+    }
+
+    // Address
+    const addressItem = detailItems[5]
+    if (addressItem) {
+      addressItem.querySelector('.portfolio-detail-text').textContent =
+        data.address
+    }
+
+    // Award
+    const awardDiv = portfolioModal.querySelector('.portfolio-award')
+    if (awardDiv) {
+      if (data.award) {
+        awardDiv.style.display = 'flex'
+        awardDiv.querySelector('p').textContent = data.award
+      } else {
+        awardDiv.style.display = 'none'
+      }
+    }
+
+    // Update navigation buttons
+    updateModalNavigationButtons()
+  }
+
+  // Add click handlers to portfolio slides
+  portfolioSlides.forEach((slide, index) => {
+    slide.addEventListener('click', (e) => {
+      e.preventDefault()
+      populatePortfolioModal(index)
+      portfolioModal.classList.add('is-open')
+      document.body.style.overflow = 'hidden'
+
+      // Ensure image starts with fade-in class
+      const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
+      if (modalImage) {
+        modalImage.classList.add('fade-in')
+      }
+    })
+  })
+
+  // Handle the old CTA button (if it still exists)
+  const portfolioOpenBtn = document.querySelector('.portfolio-cta-icon')
   if (portfolioOpenBtn && portfolioModal) {
     portfolioOpenBtn.addEventListener('click', (e) => {
       e.preventDefault()
+      populatePortfolioModal(0) // Default to first portfolio item
       portfolioModal.classList.add('is-open')
       document.body.style.overflow = 'hidden'
-      updateModalNavigationButtons()
+
+      // Ensure image starts with fade-in class
+      const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
+      if (modalImage) {
+        modalImage.classList.add('fade-in')
+      }
     })
   }
 
@@ -500,16 +610,42 @@ window.addEventListener('scroll', handleScroll)
     const prevBtn = portfolioModal.querySelector('.portfolio-nav-btn.prev')
     const nextBtn = portfolioModal.querySelector('.portfolio-nav-btn.next')
 
-    // For now, since modal shows only one static image,
-    // both buttons are disabled (white)
-    // In the future, this could be updated to check for multiple slides
+    // For looped navigation, always enable both buttons
     if (prevBtn) {
-      prevBtn.classList.remove('enabled')
-      prevBtn.classList.add('disabled')
+      prevBtn.classList.add('enabled')
+      prevBtn.classList.remove('disabled')
     }
     if (nextBtn) {
-      nextBtn.classList.remove('enabled')
-      nextBtn.classList.add('disabled')
+      nextBtn.classList.add('enabled')
+      nextBtn.classList.remove('disabled')
+    }
+  }
+
+  // Navigation button click handlers with looped navigation
+  if (portfolioModal) {
+    const prevBtn = portfolioModal.querySelector('.portfolio-nav-btn.prev')
+    const nextBtn = portfolioModal.querySelector('.portfolio-nav-btn.next')
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        const newIndex =
+          currentPortfolioIndex > 0
+            ? currentPortfolioIndex - 1
+            : portfolioData.length - 1
+        populatePortfolioModal(newIndex)
+      })
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        const newIndex =
+          currentPortfolioIndex < portfolioData.length - 1
+            ? currentPortfolioIndex + 1
+            : 0
+        populatePortfolioModal(newIndex)
+      })
     }
   }
 })()

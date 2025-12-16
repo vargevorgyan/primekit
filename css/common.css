@@ -13,7 +13,7 @@
   --color-white: #ffffffe5; /* 90% opacity white */
   --color-black: #000000e5; /* 90% opacity black */
   --color-gray: #ffffff99;
-  --font-primary: 'Pragmatica';
+  --font-primary: sans-serif, 'Pragmatica';
   --container-padding: 56px;
   --hero-height: 750px;
 }
