@@ -1,577 +1,675 @@
-const menuToggle = document.querySelector('.menu-toggle')
-const mobileMenu = document.querySelector('.mobile-menu')
-const menuClose = document.querySelector('.menu-close')
-const mobileNavLinks = document.querySelectorAll('.mobile-nav a')
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector(".mobile-menu");
+const menuClose = document.querySelector(".menu-close");
+const mobileNavLinks = document.querySelectorAll(".mobile-nav a");
 
 // Open Menu
 if (menuToggle && mobileMenu) {
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.add('is-open')
-    document.body.style.overflow = 'hidden' // Prevent scrolling when menu is open
-  })
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.add("is-open");
+    document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
+  });
 }
 
 // Close Menu
 if (menuClose && mobileMenu) {
-  menuClose.addEventListener('click', () => {
-    mobileMenu.classList.remove('is-open')
-    document.body.style.overflow = ''
-  })
+  menuClose.addEventListener("click", () => {
+    mobileMenu.classList.remove("is-open");
+    document.body.style.overflow = "";
+  });
 }
 
 // Close Menu when clicking a link
 if (mobileNavLinks) {
   mobileNavLinks.forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener("click", () => {
       if (mobileMenu) {
-        mobileMenu.classList.remove('is-open')
-        document.body.style.overflow = ''
+        mobileMenu.classList.remove("is-open");
+        document.body.style.overflow = "";
       }
-    })
-  })
+    });
+  });
 }
 
 // --- Modal Logic ---
 
-const modal = document.getElementById('contact-modal')
-const openModalBtns = document.querySelectorAll('.js-open-modal')
-const closeModalElements = document.querySelectorAll('[data-close]')
+const modal = document.getElementById("contact-modal");
+const openModalBtns = document.querySelectorAll(".js-open-modal");
+const closeModalElements = document.querySelectorAll("[data-close]");
 
 // Open Modal
 if (openModalBtns) {
   openModalBtns.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault()
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
       if (modal) {
-        modal.classList.add('is-open')
-        document.body.style.overflow = 'hidden'
+        modal.classList.add("is-open");
+        document.body.style.overflow = "hidden";
       }
       // Close mobile menu if open
-      if (mobileMenu && mobileMenu.classList.contains('is-open')) {
-        mobileMenu.classList.remove('is-open')
+      if (mobileMenu && mobileMenu.classList.contains("is-open")) {
+        mobileMenu.classList.remove("is-open");
       }
-    })
-  })
+    });
+  });
 }
 
 // Close Modal
 function closeModal() {
   if (modal) {
-    modal.classList.remove('is-open')
+    modal.classList.remove("is-open");
     // Only reset overflow if mobile menu is not open
-    if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
-      document.body.style.overflow = ''
+    if (!mobileMenu || !mobileMenu.classList.contains("is-open")) {
+      document.body.style.overflow = "";
     }
   }
 }
 
 if (closeModalElements) {
   closeModalElements.forEach((el) => {
-    el.addEventListener('click', closeModal)
-  })
+    el.addEventListener("click", closeModal);
+  });
 }
 
 // Close on Esc
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
-    closeModal()
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal && modal.classList.contains("is-open")) {
+    closeModal();
   }
-})
+});
 
 // --- Phone Mask ---
-const phoneInputs = document.querySelectorAll('input[type="tel"]')
+const phoneInputs = document.querySelectorAll('input[type="tel"]');
 
 phoneInputs.forEach((phoneInput) => {
-  phoneInput.addEventListener('input', function (e) {
+  phoneInput.addEventListener("input", function (e) {
     let x = e.target.value
-      .replace(/\D/g, '')
-      .match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/)
-    if (!x[2] && x[1] !== '') {
-      e.target.value = x[1] === '8' ? x[1] : '+7' + x[1]
+      .replace(/\D/g, "")
+      .match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+    if (!x[2] && x[1] !== "") {
+      e.target.value = x[1] === "8" ? x[1] : "+7" + x[1];
     } else {
       e.target.value = !x[2]
         ? x[1]
-        : '+7 (' +
+        : "+7 (" +
           x[2] +
-          (x[3] ? ') ' + x[3] : '') +
-          (x[4] ? '-' + x[4] : '') +
-          (x[5] ? '-' + x[5] : '')
+          (x[3] ? ") " + x[3] : "") +
+          (x[4] ? "-" + x[4] : "") +
+          (x[5] ? "-" + x[5] : "");
     }
-  })
-})
+  });
+});
 
 // --- Form Validation ---
-const forms = document.querySelectorAll('form')
+const forms = document.querySelectorAll("form");
 
 forms.forEach((form) => {
-  form.addEventListener('submit', function (e) {
-    e.preventDefault()
-    let isValid = true
-    const errorMessage = form.querySelector('.form-error-message')
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let isValid = true;
+    const errorMessage = form.querySelector(".form-error-message");
 
     // Reset errors
-    const formGroups = form.querySelectorAll('.form-group')
-    formGroups.forEach((group) => group.classList.remove('error'))
-    if (errorMessage) errorMessage.classList.remove('visible')
+    const formGroups = form.querySelectorAll(".form-group");
+    formGroups.forEach((group) => group.classList.remove("error"));
+    if (errorMessage) errorMessage.classList.remove("visible");
 
     // Validate Required Inputs
-    const requiredInputs = form.querySelectorAll('input[required]')
+    const requiredInputs = form.querySelectorAll("input[required]");
     requiredInputs.forEach((input) => {
       // Checkbox check
-      if (input.type === 'checkbox') {
+      if (input.type === "checkbox") {
         if (!input.checked) {
-          isValid = false
+          isValid = false;
           // Assuming checkbox is inside a label or div, we might want to highlight it
           // But design usually relies on border.
           // If checkbox is wrapped in .pink-checkbox, we might want to add error class to it.
           // Current generic error handling targets .form-group.
           // Let's see if we can add error to parent label or container.
           const parent =
-            input.closest('.pink-checkbox') ||
-            input.closest('.form-checkbox') ||
-            input.closest('.form-group')
-          if (parent) parent.classList.add('error') // Need styles for this if desired
+            input.closest(".pink-checkbox") ||
+            input.closest(".form-checkbox") ||
+            input.closest(".form-group");
+          if (parent) parent.classList.add("error"); // Need styles for this if desired
         }
       } else {
         if (!input.value.trim()) {
-          isValid = false
-          const group = input.closest('.form-group')
-          if (group) group.classList.add('error')
+          isValid = false;
+          const group = input.closest(".form-group");
+          if (group) group.classList.add("error");
         }
       }
-    })
+    });
 
     // Validate Phone(s)
-    const formPhoneInputs = form.querySelectorAll('input[type="tel"]')
+    const formPhoneInputs = form.querySelectorAll('input[type="tel"]');
     formPhoneInputs.forEach((input) => {
       if (input.value.trim()) {
-        const phoneDigits = input.value.replace(/\D/g, '')
+        const phoneDigits = input.value.replace(/\D/g, "");
         if (phoneDigits.length < 11) {
-          isValid = false
-          const group = input.closest('.form-group')
-          if (group) group.classList.add('error')
+          isValid = false;
+          const group = input.closest(".form-group");
+          if (group) group.classList.add("error");
         }
       }
-    })
+    });
 
     // Validate Email(s)
-    const formEmailInputs = form.querySelectorAll('input[type="email"]')
+    const formEmailInputs = form.querySelectorAll('input[type="email"]');
     formEmailInputs.forEach((input) => {
       if (input.value.trim()) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(input.value.trim())) {
-          isValid = false
-          const group = input.closest('.form-group')
-          if (group) group.classList.add('error')
+          isValid = false;
+          const group = input.closest(".form-group");
+          if (group) group.classList.add("error");
         }
       }
-    })
+    });
 
     if (!isValid) {
-      if (errorMessage) errorMessage.classList.add('visible')
+      if (errorMessage) errorMessage.classList.add("visible");
     } else {
       // Submit form (simulate)
-      alert('Форма отправлена!')
-      form.reset()
+      alert("Форма отправлена!");
+      form.reset();
       // If it's the modal form, close it
-      if (form.closest('.modal')) {
-        closeModal()
+      if (form.closest(".modal")) {
+        closeModal();
       }
     }
-  })
+  });
 
   // Clear error on input
-  const inputs = form.querySelectorAll('input, textarea')
+  const inputs = form.querySelectorAll("input, textarea");
   inputs.forEach((input) => {
-    input.addEventListener('input', function () {
-      const group = this.closest('.form-group')
-      if (group) group.classList.remove('error')
-      const errorMessage = form.querySelector('.form-error-message')
-      if (errorMessage) errorMessage.classList.remove('visible')
+    input.addEventListener("input", function () {
+      const group = this.closest(".form-group");
+      if (group) group.classList.remove("error");
+      const errorMessage = form.querySelector(".form-error-message");
+      if (errorMessage) errorMessage.classList.remove("visible");
 
-      const checkboxParent = this.closest('.pink-checkbox')
-      if (checkboxParent) checkboxParent.classList.remove('error')
-    })
-  })
-})
+      const checkboxParent = this.closest(".pink-checkbox");
+      if (checkboxParent) checkboxParent.classList.remove("error");
+    });
+  });
+});
 
 // --- Custom Dropdown Logic ---
-const selects = document.querySelectorAll('.select')
+const selects = document.querySelectorAll(".select");
 
 selects.forEach((select) => {
-  const trigger = select.querySelector('.select-trigger')
-  const options = select.querySelectorAll('.select-options li')
-  const input = select.querySelector('input[type="hidden"]')
+  const trigger = select.querySelector(".select-trigger");
+  const options = select.querySelectorAll(".select-options li");
+  const input = select.querySelector('input[type="hidden"]');
 
   if (trigger) {
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation()
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
       // Close other selects
       selects.forEach((s) => {
-        if (s !== select) s.classList.remove('open')
-      })
-      select.classList.toggle('open')
-    })
+        if (s !== select) s.classList.remove("open");
+      });
+      select.classList.toggle("open");
+    });
   }
 
   options.forEach((option) => {
-    option.addEventListener('click', (e) => {
-      e.stopPropagation()
-      const value = option.getAttribute('data-value')
-      const text = option.textContent
+    option.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const value = option.getAttribute("data-value");
+      const text = option.textContent;
 
-      if (input) input.value = value
-      if (trigger) trigger.textContent = text
+      if (input) input.value = value;
+      if (trigger) trigger.textContent = text;
 
-      select.classList.remove('open')
-    })
-  })
-})
+      select.classList.remove("open");
+    });
+  });
+});
 
 // Close dropdowns when clicking outside
-document.addEventListener('click', () => {
+document.addEventListener("click", () => {
   selects.forEach((select) => {
-    select.classList.remove('open')
-  })
-})
+    select.classList.remove("open");
+  });
+});
 
 // --- Sticky Header Blur Effect ---
-const navbar = document.querySelector('.navbar')
+const navbar = document.querySelector(".navbar");
 
 function handleScroll() {
   if (window.scrollY > 0) {
-    navbar.classList.add('navbar--scrolled')
+    navbar.classList.add("navbar--scrolled");
   } else {
-    navbar.classList.remove('navbar--scrolled')
+    navbar.classList.remove("navbar--scrolled");
   }
 }
 
 // Initial check
-handleScroll()
+handleScroll();
 
 // Listen for scroll events
-window.addEventListener('scroll', handleScroll)
+window.addEventListener("scroll", handleScroll);
 
 // --- Stats Slider ---
-;(() => {
-  const slider = document.getElementById('stats-slider')
-  if (!slider) return
+(() => {
+  const slider = document.getElementById("stats-slider");
+  if (!slider) return;
 
-  const slides = Array.from(slider.querySelectorAll('.stats-slide'))
-  const dots = Array.from(slider.querySelectorAll('.stats-timeline-dot'))
-  const delay = 4000
-  let current = 0
-  let timerId
+  const slides = Array.from(slider.querySelectorAll(".stats-slide"));
+  const dots = Array.from(slider.querySelectorAll(".stats-timeline-dot"));
+  const delay = 4000;
+  let current = 0;
+  let timerId;
 
   const applyStates = (index) => {
-    const prev = (index - 1 + slides.length) % slides.length
-    const next = (index + 1) % slides.length
+    const prev = (index - 1 + slides.length) % slides.length;
+    const next = (index + 1) % slides.length;
 
     slides.forEach((slide, i) => {
-      slide.classList.remove('state-current', 'state-prev', 'state-next')
+      slide.classList.remove("state-current", "state-prev", "state-next");
       if (i === index) {
-        slide.classList.add('state-current')
+        slide.classList.add("state-current");
       } else if (i === prev) {
-        slide.classList.add('state-prev')
+        slide.classList.add("state-prev");
       } else if (i === next) {
-        slide.classList.add('state-next')
+        slide.classList.add("state-next");
       }
-    })
+    });
 
-    updateProgress(index)
-    current = index
-  }
+    updateProgress(index);
+    current = index;
+  };
 
   const updateProgress = (index) => {
     dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index)
-      dot.classList.remove('progress')
+      dot.classList.toggle("active", i === index);
+      dot.classList.remove("progress");
       if (i < index) {
-        dot.classList.add('prev')
-      } else dot.classList.remove('prev')
+        dot.classList.add("prev");
+      } else dot.classList.remove("prev");
       if (i === index) {
-        dot.style.setProperty('--progress-duration', `${delay}ms`)
-        void dot.offsetWidth
-        dot.classList.add('progress')
+        dot.style.setProperty("--progress-duration", `${delay}ms`);
+        void dot.offsetWidth;
+        dot.classList.add("progress");
       }
-    })
-  }
+    });
+  };
 
   const goTo = (index) => {
-    const nextIndex = (index + slides.length) % slides.length
-    applyStates(nextIndex)
-  }
+    const nextIndex = (index + slides.length) % slides.length;
+    applyStates(nextIndex);
+  };
   const startAutoplay = () => {
-    clearInterval(timerId)
-    timerId = setInterval(() => goTo(current + 1), delay)
-  }
+    clearInterval(timerId);
+    timerId = setInterval(() => goTo(current + 1), delay);
+  };
 
   slides.forEach((slide) => {
-    slide.addEventListener('click', (event) => {
-      const bounds = slide.getBoundingClientRect()
-      const clickX = event.clientX - bounds.left
-      const isLeft = clickX < bounds.width / 2
-      goTo(current + (isLeft ? -1 : 1))
-      startAutoplay()
-    })
-  })
+    slide.addEventListener("click", (event) => {
+      const bounds = slide.getBoundingClientRect();
+      const clickX = event.clientX - bounds.left;
+      const isLeft = clickX < bounds.width / 2;
+      goTo(current + (isLeft ? -1 : 1));
+      startAutoplay();
+    });
+  });
 
   dots.forEach((dot) => {
-    dot.addEventListener('click', (event) => {
-      const targetIndex = Number(event.currentTarget.dataset.index)
-      goTo(targetIndex)
-      startAutoplay()
-    })
-  })
+    dot.addEventListener("click", (event) => {
+      const targetIndex = Number(event.currentTarget.dataset.index);
+      goTo(targetIndex);
+      startAutoplay();
+    });
+  });
 
-  const arrowLeft = slider.querySelector('.stats-slider-arrow-left')
-  const arrowRight = slider.querySelector('.stats-slider-arrow-right')
+  const arrowLeft = slider.querySelector(".stats-slider-arrow-left");
+  const arrowRight = slider.querySelector(".stats-slider-arrow-right");
 
   if (arrowLeft) {
-    arrowLeft.addEventListener('click', () => {
-      goTo(current - 1)
-      startAutoplay()
-    })
+    arrowLeft.addEventListener("click", () => {
+      goTo(current - 1);
+      startAutoplay();
+    });
   }
 
   if (arrowRight) {
-    arrowRight.addEventListener('click', () => {
-      goTo(current + 1)
-      startAutoplay()
-    })
+    arrowRight.addEventListener("click", () => {
+      goTo(current + 1);
+      startAutoplay();
+    });
   }
 
-  applyStates(0)
-  startAutoplay()
-})()
+  applyStates(0);
+  startAutoplay();
+})();
 
 // --- Portfolio Slider ---
-;(() => {
-  const slidesEl = document.getElementById('portfolioSlides')
-  if (!slidesEl) return
+(() => {
+  const slidesEl = document.getElementById("portfolioSlides");
+  if (!slidesEl) return;
 
-  const slides = slidesEl.children
+  const slides = slidesEl.children;
 
-  const infoIndex = document.getElementById('portfolioInfoIndex')
-  const infoTitle = document.getElementById('portfolioInfoTitle')
-  const infoSub = document.getElementById('portfolioInfoSub')
+  const infoIndex = document.getElementById("portfolioInfoIndex");
+  const infoTitle = document.getElementById("portfolioInfoTitle");
+  const infoSub = document.getElementById("portfolioInfoSub");
 
-  const prevBtn = document.getElementById('portfolioPrevBtn')
-  const nextBtn = document.getElementById('portfolioNextBtn')
+  const prevBtn = document.getElementById("portfolioPrevBtn");
+  const nextBtn = document.getElementById("portfolioNextBtn");
 
-  const progressBar = document.getElementById('portfolioProgressBar')
+  const progressBar = document.getElementById("portfolioProgressBar");
 
-  let currentIndex = 0
-  const totalSlides = slides.length
-  const slideDuration = 4000
-  let animationFrame
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  const slideDuration = 4000;
+  let animationFrame;
 
   function updateSlider() {
-    slidesEl.style.transform = `translateX(-${currentIndex * 100}%)`
+    slidesEl.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    const slide = slides[currentIndex]
-    if (infoIndex) infoIndex.innerText = slide.dataset.index
-    if (infoTitle) infoTitle.innerText = slide.dataset.title
-    if (infoSub) infoSub.innerText = slide.dataset.sub
+    const slide = slides[currentIndex];
+    if (infoIndex) infoIndex.innerText = slide.dataset.index;
+    if (infoTitle) infoTitle.innerText = slide.dataset.title;
+    if (infoSub) infoSub.innerText = slide.dataset.sub;
 
-    startProgress()
+    startProgress();
   }
 
   function startProgress() {
-    cancelAnimationFrame(animationFrame)
-    if (progressBar) progressBar.style.width = '0%'
-    let start = null
+    cancelAnimationFrame(animationFrame);
+    if (progressBar) progressBar.style.width = "0%";
+    let start = null;
 
     function animate(timestamp) {
-      if (!start) start = timestamp
-      const elapsed = timestamp - start
-      const percent = Math.min((elapsed / slideDuration) * 100, 100)
-      if (progressBar) progressBar.style.width = percent + '%'
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const percent = Math.min((elapsed / slideDuration) * 100, 100);
+      if (progressBar) progressBar.style.width = percent + "%";
       if (elapsed < slideDuration) {
-        animationFrame = requestAnimationFrame(animate)
+        animationFrame = requestAnimationFrame(animate);
       } else {
-        nextSlide()
+        nextSlide();
       }
     }
-    animationFrame = requestAnimationFrame(animate)
+    animationFrame = requestAnimationFrame(animate);
   }
 
   function nextSlide() {
-    currentIndex = (currentIndex + 1) % totalSlides
-    updateSlider()
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlider();
   }
 
   function prevSlide() {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides
-    updateSlider()
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlider();
   }
 
   if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      prevSlide()
-    })
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+    });
   }
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      nextSlide()
-    })
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+    });
   }
 
   // initialize
-  updateSlider()
-})()
+  updateSlider();
+})();
 
 // --- FAQ Accordion ---
-;(() => {
-  document.querySelectorAll('.working-faq-question').forEach((item) => {
-    const question = item.querySelector('.working-question')
-    const iconImg = item.querySelector('.working-question-icon img')
+(() => {
+  document.querySelectorAll(".working-faq-question").forEach((item) => {
+    const question = item.querySelector(".working-question");
+    const iconImg = item.querySelector(".working-question-icon img");
 
-    question.addEventListener('click', () => {
+    question.addEventListener("click", () => {
       // закрыть остальные
-      document.querySelectorAll('.working-faq-question').forEach((el) => {
+      document.querySelectorAll(".working-faq-question").forEach((el) => {
         if (el !== item) {
-          el.classList.remove('working-active')
-          const otherIcon = el.querySelector('.working-question-icon img')
+          el.classList.remove("working-active");
+          const otherIcon = el.querySelector(".working-question-icon img");
           if (otherIcon) {
-            otherIcon.src = './assets/icon-plus.svg'
-            otherIcon.alt = '+'
+            otherIcon.src = "./assets/icon-plus.svg";
+            otherIcon.alt = "+";
           }
         }
-      })
+      });
 
       // открыть / закрыть текущий
-      item.classList.toggle('working-active')
-      if (item.classList.contains('working-active')) {
-        iconImg.src = './assets/icon-minus.svg'
-        iconImg.alt = '-'
+      item.classList.toggle("working-active");
+      if (item.classList.contains("working-active")) {
+        iconImg.src = "./assets/icon-minus.svg";
+        iconImg.alt = "-";
       } else {
-        iconImg.src = './assets/icon-plus.svg'
-        iconImg.alt = '+'
+        iconImg.src = "./assets/icon-plus.svg";
+        iconImg.alt = "+";
       }
-    })
-  })
-})()
+    });
+  });
+})();
 
 // --- Portfolio Modal Logic ---
-;(() => {
-  const portfolioModal = document.getElementById('portfolio-modal')
-  const portfolioOpenBtn = document.querySelector('.portfolio-cta-icon')
+(() => {
+  const portfolioModal = document.getElementById("portfolio-modal");
+  const portfolioOpenBtn = document.querySelector(".portfolio-cta-icon");
 
   if (portfolioOpenBtn && portfolioModal) {
-    portfolioOpenBtn.addEventListener('click', (e) => {
-      e.preventDefault()
-      portfolioModal.classList.add('is-open')
-      document.body.style.overflow = 'hidden'
-      updateModalNavigationButtons()
-    })
+    portfolioOpenBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      portfolioModal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      updateModalNavigationButtons();
+    });
   }
 
   // Close Logic
   if (portfolioModal) {
-    const closeElements = portfolioModal.querySelectorAll('[data-close]')
+    const closeElements = portfolioModal.querySelectorAll("[data-close]");
     closeElements.forEach((el) => {
-      el.addEventListener('click', () => {
-        portfolioModal.classList.remove('is-open')
+      el.addEventListener("click", () => {
+        portfolioModal.classList.remove("is-open");
         // Only restore overflow if mobile menu is not open
-        const mobileMenu = document.querySelector('.mobile-menu')
-        if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
-          document.body.style.overflow = ''
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!mobileMenu || !mobileMenu.classList.contains("is-open")) {
+          document.body.style.overflow = "";
         }
-      })
-    })
+      });
+    });
 
     // Close on Esc
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && portfolioModal.classList.contains('is-open')) {
-        portfolioModal.classList.remove('is-open')
-        const mobileMenu = document.querySelector('.mobile-menu')
-        if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
-          document.body.style.overflow = ''
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && portfolioModal.classList.contains("is-open")) {
+        portfolioModal.classList.remove("is-open");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!mobileMenu || !mobileMenu.classList.contains("is-open")) {
+          document.body.style.overflow = "";
         }
       }
-    })
+    });
   }
 
   // Function to update navigation button states
   function updateModalNavigationButtons() {
-    if (!portfolioModal) return
+    if (!portfolioModal) return;
 
-    const prevBtn = portfolioModal.querySelector('.portfolio-nav-btn.prev')
-    const nextBtn = portfolioModal.querySelector('.portfolio-nav-btn.next')
+    const prevBtn = portfolioModal.querySelector(".portfolio-nav-btn.prev");
+    const nextBtn = portfolioModal.querySelector(".portfolio-nav-btn.next");
 
     // For now, since modal shows only one static image,
     // both buttons are disabled (white)
     // In the future, this could be updated to check for multiple slides
     if (prevBtn) {
-      prevBtn.classList.remove('enabled')
-      prevBtn.classList.add('disabled')
+      prevBtn.classList.remove("enabled");
+      prevBtn.classList.add("disabled");
     }
     if (nextBtn) {
-      nextBtn.classList.remove('enabled')
-      nextBtn.classList.add('disabled')
+      nextBtn.classList.remove("enabled");
+      nextBtn.classList.add("disabled");
     }
   }
-})()
+})();
 
 // --- Portfolio CTA Toggle ---
-;(() => {
-  const portfolioCta = document.querySelector('.portfolio-top-cta')
-  const portfolioContent = document.querySelector('.portfolio-cta-content')
+(() => {
+  const portfolioCta = document.querySelector(".portfolio-top-cta");
+  const portfolioContent = document.querySelector(".portfolio-cta-content");
 
   if (portfolioCta && portfolioContent) {
     // Toggle content on click
-    portfolioCta.addEventListener('click', (e) => {
+    portfolioCta.addEventListener("click", (e) => {
       // Prevent the click from bubbling if it's on the icon (which already has modal functionality)
-      if (e.target.closest('.portfolio-cta-icon')) return
+      if (e.target.closest(".portfolio-cta-icon")) return;
 
-      portfolioContent.classList.toggle('is-visible')
-    })
+      portfolioContent.classList.toggle("is-visible");
+    });
 
     // Close content when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!portfolioCta.contains(e.target)) {
-        portfolioContent.classList.remove('is-visible')
+        portfolioContent.classList.remove("is-visible");
       }
-    })
+    });
   }
-})()
+})();
 
 // --- Technic Modal Logic ---
-;(() => {
-  const technicModal = document.getElementById('technic-modal')
-  const technicOpenBtns = document.querySelectorAll('.js-open-technic-modal')
+(() => {
+  const technicModal = document.getElementById("technic-modal");
+  const technicOpenBtns = document.querySelectorAll(".js-open-technic-modal");
 
   if (technicModal && technicOpenBtns.length > 0) {
     technicOpenBtns.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault()
-        technicModal.classList.add('is-open')
-        document.body.style.overflow = 'hidden'
-      })
-    })
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        technicModal.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      });
+    });
 
     // Close Logic
-    const closeElements = technicModal.querySelectorAll('[data-close]')
+    const closeElements = technicModal.querySelectorAll("[data-close]");
     closeElements.forEach((el) => {
-      el.addEventListener('click', () => {
-        technicModal.classList.remove('is-open')
-        const mobileMenu = document.querySelector('.mobile-menu')
-        if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
-          document.body.style.overflow = ''
+      el.addEventListener("click", () => {
+        technicModal.classList.remove("is-open");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!mobileMenu || !mobileMenu.classList.contains("is-open")) {
+          document.body.style.overflow = "";
         }
-      })
-    })
+      });
+    });
 
     // Close on Esc
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && technicModal.classList.contains('is-open')) {
-        technicModal.classList.remove('is-open')
-        const mobileMenu = document.querySelector('.mobile-menu')
-        if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
-          document.body.style.overflow = ''
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && technicModal.classList.contains("is-open")) {
+        technicModal.classList.remove("is-open");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (!mobileMenu || !mobileMenu.classList.contains("is-open")) {
+          document.body.style.overflow = "";
         }
       }
-    })
+    });
   }
-})()
+})();
+
+// const observer = new IntersectionObserver((entries, {}) => {
+//   entries.forEach((entry) => {
+//     if (entry.isIntersecting) {
+//       document.body.style.height = window.innerHeight + "px";
+//       document.body.style.overflow = "hidden"
+
+//       console.log(window.scrollY);
+//     }
+//   });
+// });
+
+// const sliderWrapper = document.querySelector(".slider-wrapper");
+// observer.observe(sliderWrapper);
+// const sliderSection = document.getElementById("benefits");
+// const sliderWrapper = sliderSection.querySelector(".slider-wrapper");
+// let scrollPosition = 0;
+// let maxTranslate = sliderWrapper.scrollWidth - window.innerWidth;
+// let hijackActive = false;
+
+// // Track the original scroll position for restoration
+// let bodyScroll = window.scrollY;
+
+// // Listen for wheel scroll
+// window.addEventListener(
+//   "wheel",
+//   (e) => {
+//     const sectionTop = sliderSection.offsetTop;
+//     const sectionBottom = sectionTop + sliderSection.offsetHeight;
+
+//     if (
+//       (window.scrollY >= sectionTop && window.scrollY <= sectionBottom) ||
+//       !hijackActive
+//     ) {
+//       hijackActive = true;
+//       e.preventDefault(); // freeze page scroll
+
+//       // Accumulate scroll delta
+//       scrollPosition += e.deltaY;
+//       scrollPosition = Math.min(Math.max(scrollPosition, 0), maxTranslate);
+
+//       // Move the slider horizontally
+//       sliderWrapper.style.transform = `translateX(${-scrollPosition}px)`;
+
+//       // Stop hijack when slider ends
+//       if (scrollPosition >= maxTranslate) {
+//         hijackActive = false;
+//         // allow normal scroll
+//         // window.scrollTo(0, bodyScroll);
+//       }
+//     }
+//   },
+//   { passive: false }
+// );
+const sliderSection = document.getElementById("benefits");
+const sliderWrapper = sliderSection.querySelector(".slider-wrapper");
+let scrollPosition = 0;
+const maxTranslate = sliderWrapper.scrollWidth - window.innerWidth;
+let hijackActive = false;
+
+window.addEventListener(
+  "wheel",
+  (e) => {
+    const sectionTop = sliderSection.offsetTop;
+    const sectionBottom = sectionTop + sliderSection.offsetHeight;
+
+    // Active if inside section OR hijack is already active
+    if (
+      (window.scrollY >= sectionTop && window.scrollY < sectionBottom) ||
+      hijackActive
+    ) {
+      hijackActive = true;
+      e.preventDefault();
+
+      // Add scroll delta (down positive, up negative)
+      scrollPosition += e.deltaY;
+
+      // Clamp scroll position
+      scrollPosition = Math.max(0, Math.min(scrollPosition, maxTranslate));
+
+      // Apply horizontal transform
+      sliderWrapper.style.transform = `translateX(${-scrollPosition}px)`;
+
+      // If slider finished scrolling right, allow page scroll down
+      if (scrollPosition >= maxTranslate && e.deltaY > 0) {
+        hijackActive = false;
+        window.scrollTo({ top: sectionBottom + 1, behavior: "smooth" });
+      }
+
+      // If slider at start and user scrolls up, allow page scroll up
+      if (scrollPosition <= 0 && e.deltaY < 0) {
+        hijackActive = false;
+        window.scrollTo({ top: sectionTop - 1, behavior: "smooth" });
+      }
+    }
+  },
+  { passive: false }
+);

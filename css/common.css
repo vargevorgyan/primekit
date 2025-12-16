@@ -1,7 +1,7 @@
 @font-face {
-  font-family: 'Pragmatica';
-  src: url('../assets/font/Pragmatica.woff2') format('woff2'),
-    url('../assets/font/Pragmatica.woff') format('woff');
+  font-family: "Pragmatica";
+  src: url("../assets/font/Pragmatica.woff2") format("woff2"),
+    url("../assets/font/Pragmatica.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -13,7 +13,7 @@
   --color-white: #ffffffe5; /* 90% opacity white */
   --color-black: #000000e5; /* 90% opacity black */
   --color-gray: #ffffff99;
-  --font-primary: 'Pragmatica';
+  --font-primary: "Pragmatica";
   --container-padding: 56px;
   --hero-height: 750px;
 }
@@ -64,7 +64,22 @@ html {
 .btn-primary:hover {
   background-color: #ffc4f0;
 }
+.btn-primary img {
+  transition: transform 0.4s ease-in-out;
+}
 
+/* Hover animation */
+.btn-primary:hover img {
+  animation: arrow-move 1s ease-in-out infinite;
+}
+
+@keyframes arrow-move {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(3px); }
+  50%  { transform: translateX(0px); }
+  75%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
 .btn-primary.big {
   padding-top: 20px;
   padding-bottom: 20px;
