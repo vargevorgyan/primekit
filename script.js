@@ -799,54 +799,94 @@ function getCurrentSliderPosition() {
 // Add position tracking to avoid matrix parsing issues
 let sliderPosition = 0
 
+// Update maxTranslate on resize
+window.addEventListener('resize', () => {
+  if (sliderWrapper && sliderSection) {
+    // Assuming sliderSection is the viewport container for the wrapper
+    // If not, use window.innerWidth or the actual visible width container
+    const containerWidth =
+      sliderSection.clientWidth ||
+      sliderSection.offsetWidth ||
+      window.innerWidth
+    maxTranslate = sliderWrapper.scrollWidth - containerWidth
+    // Clamp current position
+    sliderPosition = Math.max(0, Math.min(sliderPosition, maxTranslate))
+    sliderWrapper.style.transform = `translateX(${-sliderPosition}px)`
+  }
+})
+
 window.addEventListener(
   'wheel',
   (e) => {
+    // Only hijack on larger screens
+    if (window.innerWidth < 1024) return
+
     const sectionRect = sliderSection.getBoundingClientRect()
     const windowHeight = window.innerHeight
 
-    // Check if section is in the middle of screen
+    // Check if section is "ready" to take control
     const sectionInMiddle = isSectionInMiddleOfScreen()
-    const sectionVisible =
-      sectionRect.top < windowHeight && sectionRect.bottom > 0
-
-    if (!hijackActive && sectionInMiddle) {
-      hijackActive = true
-      // Check if container is at the end of its possible position
-      if (sliderPosition < maxTranslate) {
-        // Not at the end yet, reset to start for fresh experience
-        sliderPosition = 0
-        sliderWrapper.style.transform = 'translateX(0px)'
-      }
-      // If already at the end, leave it there so user can scroll backwards
-      e.preventDefault()
-      return
-    }
 
     if (hijackActive) {
-      // Use tracked position instead of parsing CSS
-      const newPosition = sliderPosition + e.deltaY
-      const clampedPosition = Math.max(0, Math.min(newPosition, maxTranslate))
+      // Logic while hijacked: move horizontal or release
+      const delta = e.deltaY
+      const newPosition = sliderPosition + delta
 
-      // If we can still scroll in this direction, hijack the scroll
-      if (
-        (e.deltaY > 0 && sliderPosition < maxTranslate - 1) || // Small threshold to avoid precision issues
-        (e.deltaY < 0 && sliderPosition > 1) // Small threshold to avoid precision issues
-      ) {
-        e.preventDefault()
-        sliderPosition = clampedPosition
-        sliderWrapper.style.transform = `translateX(${-sliderPosition}px)`
-      } else {
-        // We've reached the bounds, deactivate hijack
-        hijackActive = false
-        // Don't prevent default - let normal page scroll happen
-        return
+      // Scrolling DOWN (delta > 0)
+      if (delta > 0) {
+        if (newPosition < maxTranslate) {
+          // Still have room to scroll right
+          e.preventDefault()
+          sliderPosition = newPosition
+          sliderWrapper.style.transform = `translateX(${-sliderPosition}px)`
+        } else {
+          // Hit the end (right side)
+          // Snap to end
+          if (sliderPosition !== maxTranslate) {
+            sliderPosition = maxTranslate
+            sliderWrapper.style.transform = `translateX(${-sliderPosition}px)`
+          }
+          // Release hijack
+          hijackActive = false
+          // Allow default scroll (page goes down)
+        }
       }
-    }
-
-    if (hijackActive && !sectionVisible) {
-      // If hijack was active but section is no longer visible, deactivate
-      hijackActive = false
+      // Scrolling UP (delta < 0)
+      else if (delta < 0) {
+        if (newPosition > 0) {
+          // Still have room to scroll left
+          e.preventDefault()
+          sliderPosition = newPosition
+          sliderWrapper.style.transform = `translateX(${-sliderPosition}px)`
+        } else {
+          // Hit the start (left side)
+          // Snap to start
+          if (sliderPosition !== 0) {
+            sliderPosition = 0
+            sliderWrapper.style.transform = `translateX(${-sliderPosition}px)`
+          }
+          // Release hijack
+          hijackActive = false
+          // Allow default scroll (page goes up)
+        }
+      }
+    } else {
+      // Logic to START hijacking
+      if (sectionInMiddle) {
+        // If scrolling DOWN and we are at the START -> Hijack
+        if (e.deltaY > 0 && sliderPosition <= 5) {
+          hijackActive = true
+          e.preventDefault()
+        }
+        // If scrolling UP and we are at the END -> Hijack
+        else if (
+          e.deltaY < 0 &&
+          sliderPosition >= maxTranslate - 5 // Tolerance
+        ) {
+          hijackActive = true
+          e.preventDefault()
+        }
+      }
     }
   },
   { passive: false }
