@@ -513,3 +513,65 @@ window.addEventListener('scroll', handleScroll)
     }
   }
 })()
+
+// --- Portfolio CTA Toggle ---
+;(() => {
+  const portfolioCta = document.querySelector('.portfolio-top-cta')
+  const portfolioContent = document.querySelector('.portfolio-cta-content')
+
+  if (portfolioCta && portfolioContent) {
+    // Toggle content on click
+    portfolioCta.addEventListener('click', (e) => {
+      // Prevent the click from bubbling if it's on the icon (which already has modal functionality)
+      if (e.target.closest('.portfolio-cta-icon')) return
+
+      portfolioContent.classList.toggle('is-visible')
+    })
+
+    // Close content when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!portfolioCta.contains(e.target)) {
+        portfolioContent.classList.remove('is-visible')
+      }
+    })
+  }
+})()
+
+// --- Technic Modal Logic ---
+;(() => {
+  const technicModal = document.getElementById('technic-modal')
+  const technicOpenBtns = document.querySelectorAll('.js-open-technic-modal')
+
+  if (technicModal && technicOpenBtns.length > 0) {
+    technicOpenBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        technicModal.classList.add('is-open')
+        document.body.style.overflow = 'hidden'
+      })
+    })
+
+    // Close Logic
+    const closeElements = technicModal.querySelectorAll('[data-close]')
+    closeElements.forEach((el) => {
+      el.addEventListener('click', () => {
+        technicModal.classList.remove('is-open')
+        const mobileMenu = document.querySelector('.mobile-menu')
+        if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
+          document.body.style.overflow = ''
+        }
+      })
+    })
+
+    // Close on Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && technicModal.classList.contains('is-open')) {
+        technicModal.classList.remove('is-open')
+        const mobileMenu = document.querySelector('.mobile-menu')
+        if (!mobileMenu || !mobileMenu.classList.contains('is-open')) {
+          document.body.style.overflow = ''
+        }
+      }
+    })
+  }
+})()

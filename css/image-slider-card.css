@@ -39,6 +39,12 @@ html {
   z-index: 10;
 }
 
+.portfolio-top-cta:hover .portfolio-cta-content,
+.portfolio-cta-content.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
 .portfolio-cta-icon {
   margin-right: 10px;
   background-color: #fff;
@@ -54,6 +60,9 @@ html {
   background: #fff;
   width: 244px;
   padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 .portfolio-cta-content p {
   color: var(--color-black);

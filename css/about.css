@@ -132,14 +132,14 @@
 }
 
 .about-copy {
-  max-width: 904px;
+  max-width: 620px;
 }
 
 .eyebrow {
   font-size: 20px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   color: #000000e5;
   margin-bottom: 20px;
 }
@@ -149,35 +149,28 @@
   line-height: 1.6;
   color: #000000e5;
   margin-bottom: 32px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .slider {
   overflow-x: auto;
   margin-top: 24px;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scroll-padding-left: var(--container-padding);
-  scroll-padding-right: var(--container-padding);
+  cursor: grab;
 }
 .slider::-webkit-scrollbar {
   display: none;
 }
 
-.slider-wrapper {
-  display: inline-flex;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
+.slider.is-dragging {
+  cursor: grabbing;
 }
 
 .slider-track {
-  display: flex;
+  display: inline-flex;
   gap: 16px;
   min-height: 220px;
   padding-bottom: 8px;
+  padding: 0 var(--container-padding);
 }
 
 .trait-card {
@@ -188,13 +181,12 @@
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
-  flex-shrink: 0;
 }
 .trait-card-info {
   display: flex;
   margin-top: auto;
   row-gap: 14px;
-  font-weight: 600;
+  font-weight: 500;
   flex-direction: column;
 }
 

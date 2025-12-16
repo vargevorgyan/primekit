@@ -1,0 +1,159 @@
+.technic-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.technic-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.technic-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.technic-modal-dialog {
+  position: relative;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  color: #000;
+}
+
+.technic-modal-content {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 70px 0;
+  position: relative;
+}
+
+.technic-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.technic-modal-title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  color: #000;
+}
+
+.technic-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.technic-modal-close:hover {
+  opacity: 0.7;
+}
+
+.technic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.technic-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 0 20px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 34px;
+}
+
+.technic-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.technic-number {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+
+.technic-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.technic-name {
+  font-size: 22px;
+  margin-top: auto;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.technic-desc {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.technic-item img {
+  width: 460px;
+  height: 263px;
+  object-fit: contain;
+  background: #f4f6f9;
+  border-radius: 4px;
+  display: block;
+  padding: 20px;
+}
+
+@media (max-width: 900px) {
+  .technic-modal-content {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .technic-item {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .technic-number {
+    font-size: 12px;
+  }
+
+  .technic-item img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
