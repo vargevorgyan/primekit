@@ -31,13 +31,19 @@ html {
   }
 }
 
+.portfolio-hero-slider:hover .portfolio-top-cta {
+  visibility: visible;
+  opacity: 1;
+}
 .portfolio-top-cta {
   position: absolute;
   top: 54px;
   left: 54px;
   display: flex;
   z-index: 10;
-  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  visibility: hidden;
 }
 
 .portfolio-cta-icon {
@@ -57,7 +63,6 @@ html {
   background: #fff;
   width: 244px;
   padding: 20px;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
   pointer-events: auto;
 }
 .portfolio-cta-content p {

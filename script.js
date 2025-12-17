@@ -597,12 +597,13 @@ window.addEventListener('scroll', handleScroll)
       openPortfolioModal()
     })
 
-    // Open on hover for desktop
+    /*
     portfolioOpenBtn.addEventListener('mouseenter', () => {
       if (window.innerWidth >= 1024) {
         openPortfolioModal()
       }
     })
+    */
 
     // Handle "Подробнее" button inside cta content
     const portfolioMoreBtn = document.querySelector('.js-open-portfolio-modal')
@@ -713,6 +714,7 @@ window.addEventListener('scroll', handleScroll)
 ;(() => {
   const portfolioCta = document.querySelector('.portfolio-top-cta')
   const portfolioContent = document.querySelector('.portfolio-cta-content')
+  const portfolioSlides = document.getElementById('portfolioSlides')
 
   if (portfolioCta && portfolioContent) {
     // Toggle content on click - DISABLED per request
