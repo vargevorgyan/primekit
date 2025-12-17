@@ -464,13 +464,21 @@ window.addEventListener('scroll', handleScroll)
   const portfolioModal = document.getElementById('portfolio-modal')
   const portfolioSlides = document.querySelectorAll('.portfolio-slide')
   let currentPortfolioIndex = 0
+  let currentImageIndex = 0
 
   // Function to populate modal with portfolio data
-  function populatePortfolioModal(index) {
-    if (!portfolioModal || !portfolioData[index]) return
+  function populatePortfolioModal(projectIndex, imageIndex = 0) {
+    if (!portfolioModal || !portfolioData[projectIndex]) return
 
-    const data = portfolioData[index]
-    currentPortfolioIndex = index
+    const data = portfolioData[projectIndex]
+    currentPortfolioIndex = projectIndex
+    currentImageIndex = imageIndex
+
+    // Get the current image from projectImages array or fallback to modalImage
+    const currentImage =
+      data.projectImages && data.projectImages[imageIndex]
+        ? data.projectImages[imageIndex]
+        : data.modalImage
 
     // Update modal image with animation
     const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
@@ -481,7 +489,7 @@ window.addEventListener('scroll', handleScroll)
 
       // Change image after fade-out completes
       setTimeout(() => {
-        modalImage.src = data.modalImage
+        modalImage.src = currentImage
         modalImage.alt = data.object
 
         // Start fade-in animation
@@ -573,7 +581,7 @@ window.addEventListener('scroll', handleScroll)
   if (portfolioOpenBtn && portfolioModal) {
     const openPortfolioModal = () => {
       const currentPortfolioIndex = window.currentPortfolioIndex || 0
-      populatePortfolioModal(currentPortfolioIndex) // Open modal for current portfolio
+      populatePortfolioModal(currentPortfolioIndex, 0) // Open modal for current portfolio, start with first image
       portfolioModal.classList.add('is-open')
       document.body.style.overflow = 'hidden'
 
@@ -634,23 +642,48 @@ window.addEventListener('scroll', handleScroll)
 
   // Function to update navigation button states
   function updateModalNavigationButtons() {
-    if (!portfolioModal) return
+    if (!portfolioModal || !portfolioData[currentPortfolioIndex]) return
 
     const prevBtn = portfolioModal.querySelector('.portfolio-nav-btn.prev')
     const nextBtn = portfolioModal.querySelector('.portfolio-nav-btn.next')
+    const projectImages = portfolioData[currentPortfolioIndex].projectImages
 
-    // For looped navigation, always enable both buttons
-    if (prevBtn) {
-      prevBtn.classList.add('enabled')
-      prevBtn.classList.remove('disabled')
+    if (!projectImages || projectImages.length <= 1) {
+      // If no images or only one image, disable both buttons
+      if (prevBtn) {
+        prevBtn.classList.add('disabled')
+        prevBtn.classList.remove('enabled')
+      }
+      if (nextBtn) {
+        nextBtn.classList.add('disabled')
+        nextBtn.classList.remove('enabled')
+      }
+      return
     }
+
+    // Enable/disable buttons based on current image position
+    if (prevBtn) {
+      if (currentImageIndex > 0) {
+        prevBtn.classList.add('enabled')
+        prevBtn.classList.remove('disabled')
+      } else {
+        prevBtn.classList.add('disabled')
+        prevBtn.classList.remove('enabled')
+      }
+    }
+
     if (nextBtn) {
-      nextBtn.classList.add('enabled')
-      nextBtn.classList.remove('disabled')
+      if (currentImageIndex < projectImages.length - 1) {
+        nextBtn.classList.add('enabled')
+        nextBtn.classList.remove('disabled')
+      } else {
+        nextBtn.classList.add('disabled')
+        nextBtn.classList.remove('enabled')
+      }
     }
   }
 
-  // Navigation button click handlers with looped navigation
+  // Navigation button click handlers for image navigation within current project
   if (portfolioModal) {
     const prevBtn = portfolioModal.querySelector('.portfolio-nav-btn.prev')
     const nextBtn = portfolioModal.querySelector('.portfolio-nav-btn.next')
@@ -658,22 +691,19 @@ window.addEventListener('scroll', handleScroll)
     if (prevBtn) {
       prevBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        const newIndex =
-          currentPortfolioIndex > 0
-            ? currentPortfolioIndex - 1
-            : portfolioData.length - 1
-        populatePortfolioModal(newIndex)
+        if (currentImageIndex > 0) {
+          populatePortfolioModal(currentPortfolioIndex, currentImageIndex - 1)
+        }
       })
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        const newIndex =
-          currentPortfolioIndex < portfolioData.length - 1
-            ? currentPortfolioIndex + 1
-            : 0
-        populatePortfolioModal(newIndex)
+        const projectImages = portfolioData[currentPortfolioIndex].projectImages
+        if (projectImages && currentImageIndex < projectImages.length - 1) {
+          populatePortfolioModal(currentPortfolioIndex, currentImageIndex + 1)
+        }
       })
     }
   }
