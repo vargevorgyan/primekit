@@ -127,7 +127,7 @@
   margin: 80px auto 0 auto;
   font-size: 20px;
   font-weight: 600;
-  letter-spacing: -1%;
+  letter-spacing: -0.01em;
 }
 .stats-slide-grid {
   display: flex;
@@ -169,7 +169,7 @@
   margin: 0 auto 20px;
   text-align: center;
   font-size: 16px;
-  letter-spacing: -1%;
+  letter-spacing: -0.01em;
   color: var(--color-gray);
   font-weight: 600;
 }

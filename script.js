@@ -366,6 +366,9 @@ window.addEventListener('scroll', handleScroll)
   const slideDuration = 4000
   let animationFrame
 
+  // Make currentIndex accessible to other parts of the code
+  window.currentPortfolioIndex = currentIndex
+
   function updateSlider() {
     slidesEl.style.transform = `translateX(-${currentIndex * 100}%)`
 
@@ -373,6 +376,9 @@ window.addEventListener('scroll', handleScroll)
     if (infoIndex) infoIndex.innerText = slide.dataset.index
     if (infoTitle) infoTitle.innerText = slide.dataset.title
     if (infoSub) infoSub.innerText = slide.dataset.sub
+
+    // Update global current portfolio index
+    window.currentPortfolioIndex = currentIndex
 
     startProgress()
   }
@@ -544,7 +550,8 @@ window.addEventListener('scroll', handleScroll)
     updateModalNavigationButtons()
   }
 
-  // Add click handlers to portfolio slides
+  // Add click handlers to portfolio slides - DISABLED per request
+  /*
   portfolioSlides.forEach((slide, index) => {
     slide.addEventListener('click', (e) => {
       e.preventDefault()
@@ -559,13 +566,14 @@ window.addEventListener('scroll', handleScroll)
       }
     })
   })
+  */
 
   // Handle the old CTA button (if it still exists)
   const portfolioOpenBtn = document.querySelector('.portfolio-cta-icon')
   if (portfolioOpenBtn && portfolioModal) {
-    portfolioOpenBtn.addEventListener('click', (e) => {
-      e.preventDefault()
-      populatePortfolioModal(0) // Default to first portfolio item
+    const openPortfolioModal = () => {
+      const currentPortfolioIndex = window.currentPortfolioIndex || 0
+      populatePortfolioModal(currentPortfolioIndex) // Open modal for current portfolio
       portfolioModal.classList.add('is-open')
       document.body.style.overflow = 'hidden'
 
@@ -574,7 +582,28 @@ window.addEventListener('scroll', handleScroll)
       if (modalImage) {
         modalImage.classList.add('fade-in')
       }
+    }
+
+    portfolioOpenBtn.addEventListener('click', (e) => {
+      e.preventDefault()
+      openPortfolioModal()
     })
+
+    // Open on hover for desktop
+    portfolioOpenBtn.addEventListener('mouseenter', () => {
+      if (window.innerWidth >= 1024) {
+        openPortfolioModal()
+      }
+    })
+
+    // Handle "Подробнее" button inside cta content
+    const portfolioMoreBtn = document.querySelector('.js-open-portfolio-modal')
+
+    if (portfolioMoreBtn) {
+      portfolioMoreBtn.addEventListener('click', (e) => {
+        openPortfolioModal()
+      })
+    }
   }
 
   // Close Logic
@@ -656,13 +685,15 @@ window.addEventListener('scroll', handleScroll)
   const portfolioContent = document.querySelector('.portfolio-cta-content')
 
   if (portfolioCta && portfolioContent) {
-    // Toggle content on click
+    // Toggle content on click - DISABLED per request
+    /*
     portfolioCta.addEventListener('click', (e) => {
       // Prevent the click from bubbling if it's on the icon (which already has modal functionality)
       if (e.target.closest('.portfolio-cta-icon')) return
 
       portfolioContent.classList.toggle('is-visible')
     })
+    */
 
     // Close content when clicking outside
     document.addEventListener('click', (e) => {

@@ -1,7 +1,7 @@
 @font-face {
-  font-family: "Pragmatica";
-  src: url("../assets/font/Pragmatica.woff2") format("woff2"),
-    url("../assets/font/Pragmatica.woff") format("woff");
+  font-family: 'Pragmatica';
+  src: url('../assets/font/Pragmatica.woff2') format('woff2'),
+    url('../assets/font/Pragmatica.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -23,6 +23,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-primary);
+  letter-spacing: -0.01em;
 }
 
 body {
@@ -74,11 +75,21 @@ html {
 }
 
 @keyframes arrow-move {
-  0%   { transform: translateX(0); }
-  25%  { transform: translateX(3px); }
-  50%  { transform: translateX(0px); }
-  75%  { transform: translateX(3px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 .btn-primary.big {
   padding-top: 20px;
