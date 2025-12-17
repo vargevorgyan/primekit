@@ -31,6 +31,16 @@ if (mobileNavLinks) {
   })
 }
 
+// --- Viewport Height Correction ---
+// Used to fix 100vh issue on mobile browsers where address bar hides content
+function setVh() {
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
+
+setVh()
+window.addEventListener('resize', setVh)
+
 // --- Modal Logic ---
 
 const modal = document.getElementById('contact-modal')

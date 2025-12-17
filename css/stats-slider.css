@@ -165,8 +165,9 @@
 }
 
 .stats-slider-description {
-  max-width: 498px;
+  max-width: 538px;
   margin: 0 auto 20px;
+  padding: 0 20px;
   text-align: center;
   font-size: 16px;
   letter-spacing: -0.01em;
