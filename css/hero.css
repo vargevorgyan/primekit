@@ -34,17 +34,18 @@
 }
 
 .hero-bottom-row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 110px;
 }
 
 /* Bottom Logo */
 .bottom-logo img {
-  height: 80px;
+  height: 109px;
   width: auto;
   display: block;
+  justify-self: end;
 }
 
 /* Hero Description */
@@ -52,16 +53,36 @@
   font-weight: 600;
   font-size: 34px;
   line-height: 100%;
-  max-width: 904px;
+  max-width: 830px;
   letter-spacing: -0.03em;
   text-align: left;
 }
 
 /* Responsive adjustments */
+@media (max-width: 1440px) {
+  .hero-bottom-row {
+    gap: 55px;
+  }
+  .hero-description {
+    font-size: 28px;
+  }
+
+  .bottom-logo img {
+    height: 83px;
+  }
+}
 @media (max-width: 1300px) {
   .hero-bottom-row {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     align-items: flex-start;
+    gap: 40px;
+  }
+  .hero-description {
+    font-size: 24px;
+  }
+
+  .bottom-logo {
+    justify-self: start;
   }
 
   .hero-description {

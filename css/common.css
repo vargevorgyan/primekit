@@ -24,6 +24,9 @@
   box-sizing: border-box;
   font-family: var(--font-primary);
   letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
