@@ -31,19 +31,17 @@ html {
   }
 }
 
-.portfolio-hero-slider:hover .portfolio-top-cta {
-  visibility: visible;
-  opacity: 1;
-}
 .portfolio-top-cta {
   position: absolute;
   top: 54px;
   left: 54px;
   display: flex;
   z-index: 10;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  visibility: hidden;
+}
+
+.portfolio-top-cta:hover .portfolio-cta-content {
+  opacity: 1;
+  visibility: visible;
 }
 
 .portfolio-cta-icon {
@@ -63,6 +61,9 @@ html {
   background: #fff;
   width: 244px;
   padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   pointer-events: auto;
 }
 .portfolio-cta-content p {
