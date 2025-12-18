@@ -205,14 +205,12 @@
   right: 0;
   bottom: 0;
   background-color: transparent;
-  backdrop-filter: blur(44px);
-  -webkit-backdrop-filter: blur(44px);
   opacity: 0;
   transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .header-modal.is-open .header-modal-overlay {
-  background-color: #000000b2;
+  background-color: #000000e3;
   opacity: 1;
 }
 
