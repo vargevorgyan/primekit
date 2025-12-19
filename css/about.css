@@ -254,6 +254,9 @@
 }
 
 @media (max-width: 768px) {
+  .marquee-track img {
+    height: 18px;
+  }
   .about-text {
     font-size: 18px;
   }
