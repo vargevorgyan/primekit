@@ -248,15 +248,44 @@ document.addEventListener('click', () => {
 // --- Sticky Header Blur Effect ---
 const navbar = document.querySelector('.navbar')
 
+let lastScrollY = window.scrollY
+let isHeaderHidden = false
+
 function handleScroll() {
-  if (window.scrollY > 0) {
-    navbar.classList.add('navbar--scrolled')
-  } else {
-    navbar.classList.remove('navbar--scrolled')
+  const currentScrollY = window.scrollY
+
+  // Handle hide/show header logic
+  if (currentScrollY > lastScrollY && currentScrollY > 100) {
+    // Scrolling down - hide header
+    if (!isHeaderHidden) {
+      navbar.classList.add('navbar--hidden')
+      navbar.classList.remove('navbar--white')
+      isHeaderHidden = true
+    }
+  } else if (currentScrollY < lastScrollY) {
+    // Scrolling up - show header
+    if (isHeaderHidden) {
+      navbar.classList.remove('navbar--hidden')
+      // Add white background only if we're not at the very top
+      if (currentScrollY > 50) {
+        navbar.classList.add('navbar--white')
+      } else {
+        navbar.classList.remove('navbar--white')
+      }
+      isHeaderHidden = false
+    }
   }
+
+  // Always remove white background when at the very top
+  if (currentScrollY <= 50 && !isHeaderHidden) {
+    navbar.classList.remove('navbar--white')
+  }
+
+  lastScrollY = currentScrollY
 }
 
-// Initial check
+// Initial check - ensure header is visible without white background at the top
+navbar.classList.remove('navbar--hidden', 'navbar--white')
 handleScroll()
 
 // Listen for scroll events

@@ -6,13 +6,26 @@
   width: 100%;
   z-index: 1000;
   padding: 24px 0;
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease,
+    transform 0.3s ease;
 }
 
-.navbar.navbar--scrolled {
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.navbar.navbar--hidden {
+  transform: translateY(-100%);
+}
+
+.navbar.navbar--white {
+  background-color: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.navbar.navbar--white .nav-links a {
+  color: var(--color-black, #000000);
+}
+
+.navbar.navbar--white .top-logo img {
+  filter: brightness(0) invert(0);
 }
 
 .navbar-container {
