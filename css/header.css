@@ -166,7 +166,6 @@
   width: 286px;
   max-height: 176px;
   object-fit: contain;
-  border-radius: 4px;
 }
 .mobile-menu-bottom {
   display: flex;
@@ -279,6 +278,15 @@
 
   .navbar-right {
     gap: 12px;
+  }
+
+  .mobile-menu-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+  .mobile-menu-bottom .btn-primary {
+    width: 100%;
   }
 
   .mobile-menu {
