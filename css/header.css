@@ -28,6 +28,10 @@
   filter: brightness(0) invert(0);
 }
 
+.navbar.navbar--white .menu-toggle img {
+  filter: brightness(0) invert(1);
+}
+
 .navbar-container {
   display: flex;
   justify-content: space-between;

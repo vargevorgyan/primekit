@@ -55,13 +55,14 @@
   line-height: 1.25;
   font-family: 'Pragmatica';
   max-width: 830px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.07em;
   text-align: left;
 }
 
 /* Responsive adjustments */
-@media (max-width: 1440px) {
+@media (max-width: 1650px) {
   .hero-bottom-row {
+    display: flex;
     gap: 55px;
   }
   .hero-description {
@@ -74,6 +75,7 @@
 }
 @media (max-width: 1300px) {
   .hero-bottom-row {
+    display: grid;
     grid-template-columns: 1fr;
     align-items: flex-start;
     gap: 40px;
