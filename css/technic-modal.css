@@ -59,7 +59,7 @@
 
 .technic-modal-title {
   font-size: 40px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
   color: #000;
 }
@@ -116,7 +116,7 @@
 .technic-name {
   font-size: 22px;
   margin-top: auto;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   margin-bottom: 20px;
 }

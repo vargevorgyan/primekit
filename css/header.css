@@ -62,7 +62,7 @@
 .nav-links a {
   color: var(--color-white);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   line-height: 100%;
   transition: opacity 0.2s;
@@ -143,7 +143,7 @@
   color: white;
   text-decoration: none;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -155,7 +155,7 @@
 
 .social-label {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
   color: white;
 }
 
@@ -168,7 +168,7 @@
   color: var(--color-pink);
   text-decoration: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -259,7 +259,7 @@
 }
 
 .header-modal-title {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 30px;
   line-height: 100%;
   letter-spacing: -0.03em;

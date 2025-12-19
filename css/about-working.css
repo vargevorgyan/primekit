@@ -1,7 +1,7 @@
 .working-how-we-work,
 .working-equipment,
 .working-faq {
-  font-weight: 600;
+  font-weight: 500;
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 140px 56px 0 56px;

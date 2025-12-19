@@ -69,13 +69,13 @@ html {
 .portfolio-cta-content p {
   color: var(--color-black);
   margin-bottom: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   letter-spacing: -0.03em;
 }
 .cta-content p {
   color: var(--color-black);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   margin-bottom: 16px;
 }
@@ -123,7 +123,7 @@ html {
 
 .portfolio-info-title {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 6px;
   letter-spacing: -0.03em;
   color: #222;
