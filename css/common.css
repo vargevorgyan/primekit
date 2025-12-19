@@ -114,9 +114,13 @@ html {
   cursor: pointer;
 }
 
-.menu-toggle img {
+.menu-toggle .menu-icon {
   width: 32px;
   height: 32px;
+}
+
+.menu-toggle {
+  color: white;
 }
 
 /* --- Common Form Styles --- */

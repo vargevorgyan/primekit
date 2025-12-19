@@ -28,8 +28,8 @@
   filter: brightness(0) invert(0);
 }
 
-.navbar.navbar--white .menu-toggle img {
-  filter: brightness(0) invert(1);
+.navbar.navbar--white .menu-toggle {
+  color: var(--color-black, #000000);
 }
 
 .navbar-container {
