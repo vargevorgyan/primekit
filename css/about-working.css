@@ -100,7 +100,7 @@
 .working-faq-question {
   display: flex;
   max-height: 88px;
-  font-family: 'Pragmatica';
+  font-family: 'Inter';
   overflow: hidden;
   flex-direction: column;
   border-bottom: 1px solid #00000033;
