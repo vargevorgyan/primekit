@@ -1,7 +1,7 @@
 /* About / Marquee / Slider */
 .about-section {
   background-color: #fff;
-  padding: 0 0 96px;
+  padding: 0 0 140px;
 }
 
 /* Marquee Container */
@@ -234,6 +234,9 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .about-section {
+    padding-bottom: 60px;
+  }
   .about-image {
     height: 400px;
   }
@@ -265,6 +268,9 @@
 }
 
 @media (max-width: 768px) {
+  .about-section {
+    padding-bottom: 50px;
+  }
   .marquee-track img {
     height: 18px;
   }

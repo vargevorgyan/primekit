@@ -615,43 +615,27 @@ window.addEventListener('scroll', handleScroll)
   })
   */
 
-  // Handle the old CTA button (if it still exists)
-  const portfolioOpenBtn = document.querySelector('.portfolio-cta-icon')
-  if (portfolioOpenBtn && portfolioModal) {
-    const openPortfolioModal = () => {
-      const currentPortfolioIndex = window.currentPortfolioIndex || 0
-      populatePortfolioModal(currentPortfolioIndex, 0) // Open modal for current portfolio, start with first image
-      portfolioModal.classList.add('is-open')
-      document.body.style.overflow = 'hidden'
+  // Portfolio modal logic moved to separate CTA section below
+  const openPortfolioModal = () => {
+    const currentPortfolioIndex = window.currentPortfolioIndex || 0
+    populatePortfolioModal(currentPortfolioIndex, 0) // Open modal for current portfolio, start with first image
+    portfolioModal.classList.add('is-open')
+    document.body.style.overflow = 'hidden'
 
-      // Ensure image starts with fade-in class
-      const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
-      if (modalImage) {
-        modalImage.classList.add('fade-in')
-      }
+    // Ensure image starts with fade-in class
+    const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
+    if (modalImage) {
+      modalImage.classList.add('fade-in')
     }
+  }
 
-    portfolioOpenBtn.addEventListener('click', (e) => {
-      e.preventDefault()
+  // Handle "Подробнее" button inside cta content
+  const portfolioMoreBtn = document.querySelector('.js-open-portfolio-modal')
+
+  if (portfolioMoreBtn) {
+    portfolioMoreBtn.addEventListener('click', (e) => {
       openPortfolioModal()
     })
-
-    /*
-    portfolioOpenBtn.addEventListener('mouseenter', () => {
-      if (window.innerWidth >= 1024) {
-        openPortfolioModal()
-      }
-    })
-    */
-
-    // Handle "Подробнее" button inside cta content
-    const portfolioMoreBtn = document.querySelector('.js-open-portfolio-modal')
-
-    if (portfolioMoreBtn) {
-      portfolioMoreBtn.addEventListener('click', (e) => {
-        openPortfolioModal()
-      })
-    }
   }
 
   // Close Logic
