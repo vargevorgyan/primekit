@@ -169,6 +169,12 @@ html {
   border-radius: 0;
 }
 
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
 .form-group textarea {
   resize: none;
   min-height: 80px;
