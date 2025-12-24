@@ -271,8 +271,8 @@ const portfolioData = [
     index: '(Школа на 815 мест)',
     title: 'МР Групп',
     sub: '05/12',
-    image: './assets/portfolio/p5.png',
-    modalImage: './assets/portfolio/p5.png',
+    image: './assets/portfolio/p5.jpg',
+    modalImage: './assets/portfolio/p5.jpg',
     projectImages: [
       './assets/5/IMG-20251101-WA0007.jpg',
       './assets/5/IMG-20251101-WA0008.jpg',
