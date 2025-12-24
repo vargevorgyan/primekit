@@ -1181,12 +1181,12 @@
 
         elements.forEach((el) => {
           applyInitialState(el)
-          if (prefersReduced) {
-            // Respect reduced motion: show immediately
-            animateIn(el)
-          } else {
-            observer.observe(el)
-          }
+          // if (prefersReduced) {
+          //   // Respect reduced motion: show immediately
+          //   animateIn(el)
+          // } else {
+          //   observer.observe(el)
+          // }
         })
 
         // In case late-loading images shift layout, ensure IO runs after load
