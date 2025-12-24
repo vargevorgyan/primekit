@@ -114,6 +114,24 @@ html {
   }
 }
 
+/* Scroll animations (AOS-like) */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: transform var(--aos-duration, 600ms) ease,
+    opacity var(--aos-duration, 600ms) ease;
+  will-change: opacity, transform;
+}
+[data-aos].aos-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    transition: none !important;
+  }
+}
+
 /* Disable scroll while preloader is visible */
 body.is-preloading {
   overflow: hidden;
@@ -139,7 +157,7 @@ body.is-preloading {
   line-height: 100%;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color opacity transform 0.2s;
   gap: 8px;
 }
 
