@@ -15,7 +15,13 @@
     <link rel="stylesheet" href="./css/about-working.css" />
     <link rel="stylesheet" href="./css/footer.css" />
   </head>
-  <body>
+  <body class="is-preloading">
+    <div class="preloader preloader--visible" aria-hidden="true">
+      <div class="preloader__content">
+        <img class="preloader__logo" src="./assets/logo-bottom.svg" alt="" />
+        <div class="preloader__appearing"></div>
+      </div>
+    </div>
     <header class="navbar">
       <div class="container navbar-container">
         <a href="#" class="logo top-logo">
@@ -1097,6 +1103,28 @@
         </div>
       </div>
     </div>
+    <script>
+      ;(function () {
+        var preloader = document.querySelector('.preloader')
+        if (!preloader) return
+
+        function hidePreloader() {
+          if (!preloader || preloader.classList.contains('preloader--hidden'))
+            return
+          preloader.classList.remove('preloader--visible')
+          var onEnd = function (e) {
+            if (e.propertyName !== 'opacity') return
+            preloader.classList.add('preloader--hidden')
+            preloader.removeEventListener('transitionend', onEnd)
+            document.body.classList.remove('is-preloading')
+          }
+          preloader.addEventListener('transitionend', onEnd)
+        }
+
+        // Fallback in case load is delayed
+        setTimeout(hidePreloader, 1600)
+      })()
+    </script>
 
     <script src="./data.js"></script>
     <script src="./script.js"></script>

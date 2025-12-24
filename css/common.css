@@ -58,6 +58,67 @@ html {
   scroll-padding-top: 50px;
 }
 
+/* Full-screen preloader */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0e0e0e; /* match hero bg */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 360ms ease;
+}
+.preloader--visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.preloader--hidden {
+  display: none;
+}
+.preloader__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.preloader__logo {
+  width: clamp(200px, 36vw, 580px);
+  height: auto;
+}
+
+.preloader__appearing {
+  position: absolute;
+  top: -50%;
+  right: 0;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to left, #0e0e0e 50%, transparent);
+  animation: preloaderAppearing 2.8s;
+  animation-delay: 0.2s;
+}
+@keyframes preloaderAppearing {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -200%;
+  }
+}
+/* no appear animation â€” only fade out on hide */
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    transition: none;
+  }
+}
+
+/* Disable scroll while preloader is visible */
+body.is-preloading {
+  overflow: hidden;
+}
+
 /* Container */
 .container {
   padding: 0 var(--container-padding);
