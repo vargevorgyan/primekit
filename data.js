@@ -227,8 +227,8 @@ const portfolioData = [
     index: '(ДОУ на 250 мест)',
     title: 'ГК Самолет',
     sub: '04/12',
-    image: './assets/portfolio/p4.png',
-    modalImage: './assets/portfolio/p4.png',
+    image: './assets/portfolio/p4.jpg',
+    modalImage: './assets/portfolio/p4.jpg',
     projectImages: [
       './assets/4/4H9A7035.jpg',
       './assets/4/4H9A7061.jpg',
