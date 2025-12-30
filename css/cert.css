@@ -155,6 +155,12 @@
     font-size: 26px;
     margin-bottom: 40px;
   }
+  .cert-title {
+    font-size: 26px;
+  }
+  .in-numbers-title {
+    font-size: 26px;
+  }
   .cert-images {
     grid-template-columns: 1fr;
   }
