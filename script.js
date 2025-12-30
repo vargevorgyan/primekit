@@ -519,21 +519,59 @@ window.addEventListener('scroll', handleScroll)
         ? data.projectImages[imageIndex]
         : data.modalImage
 
-    // Update modal image with animation
+    // Update modal image/video with animation
     const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
-    if (modalImage) {
+    const modalVideo = portfolioModal.querySelector('.portfolio-modal-video')
+
+    if (modalImage && modalVideo) {
+      const isVideo = currentImage.toLowerCase().endsWith('.mp4')
+
+      // Identify currently visible element or default to image
+      const activeElement =
+        modalVideo.style.display === 'block' ? modalVideo : modalImage
+
       // Start fade-out animation
-      modalImage.classList.add('fade-out')
-      modalImage.classList.remove('fade-in')
+      activeElement.classList.add('fade-out')
+      activeElement.classList.remove('fade-in')
 
-      // Change image after fade-out completes
+      // Change content after fade-out completes
       setTimeout(() => {
-        modalImage.src = currentImage
-        modalImage.alt = data.object
+        if (isVideo) {
+          modalImage.style.display = 'none'
+          modalImage.classList.remove('fade-in')
 
-        // Start fade-in animation
-        modalImage.classList.remove('fade-out')
-        modalImage.classList.add('fade-in')
+          modalVideo.style.display = 'block'
+          modalVideo.src = currentImage
+          modalVideo.load() // Ensure video loads
+          modalVideo.play() // Autoplay
+
+          modalVideo.classList.remove('fade-out')
+          modalVideo.classList.add('fade-in')
+
+          // Add class to container to adjust button height for video controls
+          const container = portfolioModal.querySelector(
+            '.portfolio-modal-image-container'
+          )
+          if (container) container.classList.add('video-active')
+        } else {
+          modalVideo.pause()
+          modalVideo.style.display = 'none'
+          modalVideo.src = ''
+          modalVideo.classList.remove('fade-in')
+
+          modalImage.style.display = 'block'
+          modalImage.src = currentImage
+          modalImage.alt = data.object
+
+          modalImage.classList.remove('fade-out')
+          modalImage.classList.add('fade-in')
+
+          // Remove class from container
+          const container = portfolioModal.querySelector(
+            '.portfolio-modal-image-container'
+          )
+          if (container) container.classList.remove('video-active')
+        }
       }, 150) // Half of the transition duration
     }
 
@@ -622,11 +660,14 @@ window.addEventListener('scroll', handleScroll)
     portfolioModal.classList.add('is-open')
     document.body.style.overflow = 'hidden'
 
-    // Ensure image starts with fade-in class
+    // Ensure image/video starts with fade-in class
     const modalImage = portfolioModal.querySelector('.portfolio-modal-image')
-    if (modalImage) {
-      modalImage.classList.add('fade-in')
-    }
+    const modalVideo = portfolioModal.querySelector('.portfolio-modal-video')
+    
+    // We rely on populatePortfolioModal to handle the fade-in/out logic
+    // but just in case we need to reset state if modal was closed in a weird state:
+    if (modalImage) modalImage.classList.remove('fade-out')
+    if (modalVideo) modalVideo.classList.remove('fade-out')
   }
 
   // Handle "Подробнее" button inside cta content

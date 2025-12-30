@@ -41,6 +41,7 @@ const portfolioData = [
       './assets/1/L59A9435.jpg',
       './assets/1/L59A9469.jpg',
       './assets/1/L59A9487.jpg',
+      './assets/1/IMG_9563.MP4',
       './assets/1/L59A9491.jpg',
       './assets/1/L59A9506.jpg',
       './assets/1/L59A9519.jpg',

@@ -109,6 +109,25 @@
   opacity: 1;
 }
 
+/* Video Styles */
+.portfolio-modal-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  min-height: 250px;
+  transition: opacity 0.3s ease-in-out;
+  background: #000;
+}
+
+.portfolio-modal-video.fade-out {
+  opacity: 0;
+}
+
+.portfolio-modal-video.fade-in {
+  opacity: 1;
+}
+
 .portfolio-nav-btn {
   position: absolute;
   top: 0;
@@ -123,6 +142,27 @@
   justify-content: center;
   transition: opacity 0.3s ease;
   padding: 0;
+}
+
+/* Adjust nav buttons when video is active to avoid covering controls */
+.portfolio-modal-image-container.video-active .portfolio-nav-btn {
+  height: calc(100% - 120px);
+  bottom: auto; /* Ensure height takes precedence over bottom: 0 */
+  background: none;
+}
+
+/* Compensate for the height change to keep the icon vertically centered relative to the full container height */
+.portfolio-modal-image-container.video-active .portfolio-nav-btn svg,
+.portfolio-modal-image-container.video-active .portfolio-nav-btn img {
+  transform: translateY(60px); /* Move down by half of the 120px space */
+}
+
+.portfolio-nav-btn.next svg {
+  transform: rotate(180deg);
+}
+
+.portfolio-modal-image-container.video-active .portfolio-nav-btn.next svg {
+  transform: translateY(60px) rotate(180deg);
 }
 
 .portfolio-nav-btn.prev {
@@ -254,7 +294,8 @@
     aspect-ratio: 16/9; /* Maintain aspect ratio */
   }
 
-  .portfolio-modal-image {
+  .portfolio-modal-image,
+  .portfolio-modal-video {
     height: 100%;
     min-height: 250px;
   }
