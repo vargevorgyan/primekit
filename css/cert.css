@@ -1,5 +1,5 @@
 .cert {
-  padding: 140px 56px 60px 56px;
+  padding: 100px 56px 60px 56px;
   background: white;
 }
 
@@ -17,7 +17,6 @@
 
 .in-numbers-title {
   color: white;
-  font-size: 44px;
 }
 
 .in-numbers-grid {
