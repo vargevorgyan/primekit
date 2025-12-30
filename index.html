@@ -131,11 +131,11 @@
         <div class="container hero-content">
           <div class="hero-bottom-row">
             <!-- Bottom Logo with custom colors -->
-            <div class="bottom-logo">
+            <div class="bottom-logo hero-animate">
               <img src="./assets/logo-bottom.svg" alt="PRIMEKIT" />
             </div>
 
-            <div class="hero-description">
+            <div class="hero-description hero-animate">
               Комплексное оснащение социальных объектов оборудованием и мебелью
               — от проектирования до сдачи и гарантийного обслуживания
             </div>
@@ -373,7 +373,9 @@
             data-index="01/06"
             data-title="C3 Резиденс"
             data-sub="(Школа на 825 мест)"
-            style="background-image: url('./assets/portfolio/p1.jpg')"
+            style="
+              background-image: url('./assets/1/Фото для обложки портфолио.jpg');
+            "
           ></div>
 
           <div
@@ -381,7 +383,9 @@
             data-index="02/06"
             data-title="ГК ПИК"
             data-sub="(Поликлиника на 475 мест)"
-            style="background-image: url('./assets/portfolio/p2.png')"
+            style="
+              background-image: url('./assets/2/Фото для обложки портфолио.jpg');
+            "
           ></div>
 
           <div
@@ -389,7 +393,9 @@
             data-index="03/06"
             data-title="ГК ПИК"
             data-sub="(Женская консультация на 475 мест)"
-            style="background-image: url('./assets/portfolio/p3.png')"
+            style="
+              background-image: url('./assets/3/Фото для обложки портфолио.jpg');
+            "
           ></div>
 
           <div
@@ -397,7 +403,9 @@
             data-index="04/06"
             data-title="ГК Самолет"
             data-sub="(ДОУ на 250 мест)"
-            style="background-image: url('./assets/portfolio/p4.jpg')"
+            style="
+              background-image: url('./assets/4/Фото для обложки портфолио.jpg');
+            "
           ></div>
 
           <div
@@ -405,7 +413,9 @@
             data-index="05/06"
             data-title="МР Групп"
             data-sub="(Школа на 815 мест)"
-            style="background-image: url('./assets/portfolio/p5.jpg')"
+            style="
+              background-image: url('./assets/5/Фото для обложки профиля.jpeg');
+            "
           ></div>
 
           <div
@@ -413,7 +423,9 @@
             data-index="06/06"
             data-title="МКУ ГО ХИМКИ"
             data-sub="(Школа на 815 мест)"
-            style="background-image: url('./assets/portfolio/p6.png')"
+            style="
+              background-image: url('./assets/6/Фото_для_обложки_портфолио.jpg');
+            "
           ></div>
         </div>
 
@@ -1132,6 +1144,12 @@
             preloader.classList.add('preloader--hidden')
             preloader.removeEventListener('transitionend', onEnd)
             document.body.classList.remove('is-preloading')
+
+            // Animate hero elements when preloader closes
+            const heroElements = document.querySelectorAll('.hero-animate')
+            heroElements.forEach(function (el) {
+              el.classList.add('hero-animated')
+            })
           }
           preloader.addEventListener('transitionend', onEnd)
         }
@@ -1182,7 +1200,6 @@
         elements.forEach((el) => {
           applyInitialState(el)
           if (prefersReduced) {
-            // Respect reduced motion: show immediately
             animateIn(el)
           } else {
             observer.observe(el)

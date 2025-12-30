@@ -1,3 +1,17 @@
+/* Hero animations on preloader close */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: transform 600ms ease,
+    opacity 600ms ease;
+  will-change: opacity, transform;
+}
+
+.hero-animate.hero-animated {
+  opacity: 1;
+  transform: none;
+}
+
 /* Hero Section */
 .hero-section {
   position: relative;

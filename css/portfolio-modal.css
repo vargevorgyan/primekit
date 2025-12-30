@@ -147,10 +147,9 @@
   );
 }
 
-/* Button states: white when disabled, pink when enabled */
-.portfolio-nav-btn.disabled img {
-  filter: brightness(0) invert(1); /* White color */
-  opacity: 0.5;
+/* Button states: hide when disabled, pink when enabled */
+.portfolio-nav-btn.disabled {
+  display: none;
 }
 
 .portfolio-nav-btn.enabled img {

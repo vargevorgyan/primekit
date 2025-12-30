@@ -115,7 +115,7 @@ html {
 }
 
 /* Scroll animations (AOS-like) */
-/* [data-aos] {
+[data-aos] {
   opacity: 0;
   transform: translateY(24px);
   transition: transform var(--aos-duration, 600ms) ease,
@@ -130,7 +130,7 @@ html {
   [data-aos] {
     transition: none !important;
   }
-} */
+}
 
 /* Disable scroll while preloader is visible */
 body.is-preloading {
