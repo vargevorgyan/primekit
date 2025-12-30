@@ -13,6 +13,7 @@
 
 .in-numbers {
   position: relative;
+  display: none;
 }
 
 .in-numbers-title {
