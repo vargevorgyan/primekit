@@ -2,8 +2,7 @@
 .hero-animate {
   opacity: 0;
   transform: translateY(24px);
-  transition: transform 600ms ease,
-    opacity 600ms ease;
+  transition: transform 600ms ease, opacity 600ms ease;
   will-change: opacity, transform;
 }
 
@@ -64,12 +63,12 @@
 
 /* Hero Description */
 .hero-description {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 34px;
   line-height: 1.25;
   font-family: 'Inter';
   max-width: 830px;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.02em;
   text-align: left;
 }
 
