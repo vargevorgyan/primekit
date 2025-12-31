@@ -287,4 +287,8 @@
   .stats-timeline-dot {
     width: 64px;
   }
+
+  .stats-slider-timeline {
+    padding: 0 20px;
+  }
 }
