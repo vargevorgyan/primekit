@@ -72,6 +72,11 @@
   text-align: left;
 }
 
+@media (max-width: 1784px) {
+  .hero-description {
+    font-size: 30px;
+  }
+}
 /* Responsive adjustments */
 @media (max-width: 1650px) {
   .hero-bottom-row {
@@ -86,7 +91,7 @@
     height: 83px;
   }
 }
-@media (max-width: 1300px) {
+@media (max-width: 1450px) {
   .hero-bottom-row {
     display: grid;
     grid-template-columns: 1fr;
